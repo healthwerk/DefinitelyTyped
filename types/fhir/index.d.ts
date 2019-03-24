@@ -12796,39 +12796,35 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         /**
          * The code-valued attribute of the filter
          */
-        path: string;
+        path?: string;
         /**
          * Contains extended information for property 'path'.
          */
         _path?: Element;
         /**
+         * The coded (token) parameter to search on
+         */
+        searchParam?: string;
+        /**
+         * Contains extended information for property 'searchParam'
+         */
+        _searchParam?: Element;
+        /**
          * Valueset for the filter
          */
-        valueSetString?: string;
+        valueSet?: canonical;
         /**
-         * Contains extended information for property 'valueSetString'.
+         * Contains extended information for property 'valueSet'.
          */
-        _valueSetString?: Element;
+        _valueSet?: Element;
         /**
-         * Valueset for the filter
+         * 	What code is expected
          */
-        valueSetReference?: Reference;
+        code?: Coding[];
         /**
-         * What code is expected
+         * Contains extended information for property 'code'
          */
-        valueCode?: code[];
-        /**
-         * Contains extended information for property 'valueCode'.
-         */
-        _valueCode?: Element[];
-        /**
-         * What Coding is expected
-         */
-        valueCoding?: Coding[];
-        /**
-         * What CodeableConcept is expected
-         */
-        valueCodeableConcept?: CodeableConcept[];
+        _code?: Element;
     }
     /**
      * What dates/date ranges are expected
@@ -12837,11 +12833,19 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         /**
          * The date-valued attribute of the filter
          */
-        path: string;
+        path?: string;
         /**
          * Contains extended information for property 'path'.
          */
         _path?: Element;
+        /**
+         * The date valued parameter to search on
+         */
+        searchParam?: string;
+        /**
+         * Contains extended information for property 'searchParam'
+         */
+        _searchParam?: Element;
         /**
          * The value of the filter, as a Period, DateTime, or Duration value
          */
@@ -12858,6 +12862,27 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
          * The value of the filter, as a Period, DateTime, or Duration value
          */
         valueDuration?: Duration;
+    }
+    /**
+     * Order of the results
+     */
+    interface DataRequirementSort extends Element {
+        /**
+         * The name of the attribute to perform the sort
+         */
+        path: string;
+        /**
+         * Contains extended information for property 'path'
+         */
+        _path?: Element;
+        /**
+         * The direction of the sort, ascending or descending.
+         */
+        direction: code;
+        /**
+         * Contains extended information for property 'direction'
+         */
+        _direction?: Element;
     }
     /**
      * Describes a required data item
@@ -12881,6 +12906,14 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
          */
         _profile?: Element[];
         /**
+         * The intended subjects of the data requirement. Reference to a group
+         */
+        subjectRerence?: Reference;
+        /**
+         * The intended subjects of the data requirement.
+         */
+        subjectCodeableConcept?: CodeableConcept;
+        /**
          * Indicates that specific structure elements are referenced by the knowledge module
          */
         mustSupport?: string[];
@@ -12896,6 +12929,18 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
          * What dates/date ranges are expected
          */
         dateFilter?: DataRequirementDateFilter[];
+        /**
+         * 	Number of results
+         */
+        limit: positiveInt;
+        /**
+         * Contains extended information for property 'limit'
+         */
+        _limit?: Element;
+        /**
+         * Order of the results
+         */
+        sort: DataRequirementSort[];
     }
     /**
      * The formal response to a guidance request
