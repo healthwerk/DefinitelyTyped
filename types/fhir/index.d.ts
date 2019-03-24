@@ -12,6 +12,14 @@ declare module fhir {
      */
     type uri = string;
     /**
+     * A Uniform Resource Locator
+     */
+    type url = string;
+    /**
+     * A URI that refers to a resource by its canonical URL 
+     */
+    type canonical = string;
+    /**
      * A stream of bytes
      */
     type base64Binary = string;
@@ -59,6 +67,10 @@ declare module fhir {
      * An integer with a value that is not negative (e.g. >= 0)
      */
     type unsignedInt = number;
+    /**
+     * A UUID (aka GUID) represented as a URI  e.g. urn:uuid:c757873d-ec9a-4326-a141-556f43239520
+     */
+    type uuid = string;
     /**
      * Time range defined by start and end date/time
      */
@@ -1866,7 +1878,8 @@ declare module fhir {
          */
         identifier?: Identifier;
         /**
-         * AE | PAE An adverse event is an event that caused harm to a patient,  an adverse reaction is a something that is a subject-specific event that is a result of an exposure to a medication, food, device or environmental substance, a potential adverse event is something that occurred and that could have caused harm to a patient but did not
+         * AE | PAE 
+An adverse event is an event that caused harm to a patient,  an adverse reaction is a something that is a subject-specific event that is a result of an exposure to a medication, food, device or environmental substance, a potential adverse event is something that occurred and that could have caused harm to a patient but did not
          */
         category?: code;
         /**
