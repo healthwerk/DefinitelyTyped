@@ -383,7 +383,7 @@ declare module fhir {
         /**
          * The annotation  - text content
          */
-        text: string;
+        text: markdown;
         /**
          * Contains extended information for property 'text'.
          */
@@ -423,7 +423,7 @@ declare module fhir {
         /**
          * Uri where the data can be found
          */
-        url?: uri;
+        url?: url;
         /**
          * Contains extended information for property 'url'.
          */
@@ -1159,7 +1159,7 @@ declare module fhir {
         /**
          * Profiles this resource claims to conform to
          */
-        profile?: uri[];
+        profile?: canonical[];
         /**
          * Contains extended information for property 'profile'.
          */
@@ -1458,7 +1458,7 @@ declare module fhir {
         /**
          * Bibliographic citation for the artifact
          */
-        citation?: string;
+        citation?: markdown;
         /**
          * Contains extended information for property 'citation'.
          */
@@ -1466,7 +1466,7 @@ declare module fhir {
         /**
          * Where the artifact can be accessed
          */
-        url?: uri;
+        url?: url;
         /**
          * Contains extended information for property 'url'.
          */
@@ -1478,7 +1478,7 @@ declare module fhir {
         /**
          * What resource is being referenced
          */
-        resource?: Reference;
+        resource?: canonical;
     }
     /**
      * Who should participate in the action
@@ -7610,7 +7610,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         /**
          * Profile (StructureDefinition) to apply (or IG)
          */
-        profile?: uri;
+        profile?: canonical;
         /**
          * Contains extended information for property 'profile'.
          */
@@ -7618,7 +7618,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         /**
          * Profile (StructureDefinition) to apply to reference target (or IG)
          */
-        targetProfile?: uri;
+        targetProfile?: canonical;
         /**
          * Contains extended information for property 'targetProfile'.
          */
@@ -7927,7 +7927,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         /**
          * Reference to original source of constraint
          */
-        source?: uri;
+        source?: canonical;
         /**
          * Contains extended information for property 'source'.
          */
@@ -12875,7 +12875,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         /**
          * The profile of the required data
          */
-        profile?: uri[];
+        profile?: canonical[];
         /**
          * Contains extended information for property 'profile'.
          */
@@ -14168,7 +14168,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         /**
          * What profile the value is expected to be
          */
-        profile?: Reference;
+        profile?: canonical;
     }
     /**
      * Represents a library of quality improvement components
