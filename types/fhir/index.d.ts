@@ -1508,7 +1508,7 @@ declare module fhir {
         /**
          * Contains extended information for property 'type'
          */
-        _type: Element;
+        _type?: Element;
         /**
          * Amount of medication per dose
          */
@@ -1516,7 +1516,7 @@ declare module fhir {
         /**
          * Contains extended information for property 'doseRange'
          */
-        _doseRange: Element;
+        _doseRange?: Element;
         /**
          * Amount of medication per dose
          */
@@ -1524,7 +1524,7 @@ declare module fhir {
         /**
          * Contains extended information for property 'doseQuantity'
          */
-        _doseQuantity: Element;
+        _doseQuantity?: Element;
         /**
          * Amount of medication per unit of time
          */
@@ -1532,7 +1532,7 @@ declare module fhir {
         /**
          * Contains extended information for property 'rateRatio'
          */
-        _rateRatio: Element;
+        _rateRatio?: Element;
         /**
          * Amount of medication per unit of time
          */
@@ -1540,7 +1540,7 @@ declare module fhir {
         /**
          * Contains extended information for property 'rateRange'
          */
-        _rateRange: Element;
+        _rateRange?: Element;
         /**
          * Amount of medication per unit of time
          */
@@ -1548,7 +1548,7 @@ declare module fhir {
         /**
          * Contains extended information for property 'rateQuantity'
          */
-        _rateQuantity: Element;
+        _rateQuantity?: Element;
     }
     /**
      * How the medication is/was taken or should be taken
@@ -8110,7 +8110,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         /**
          * 	If this slice definition constrains an inherited slice definition (or not)
          */
-        sliceIsContraining: boolean;
+        sliceIsContraining?: boolean;
         /**
          * Name for element to display with or prompt for element
          */
@@ -9179,7 +9179,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         /**
          * Contains extended information for property 'isModifierReason'
          */
-        _isModifierReason: Element;
+        _isModifierReason?: Element;
         /**
          * Include when _summary = true?
          */
@@ -13194,7 +13194,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         /**
          * 	Number of results
          */
-        limit: positiveInt;
+        limit?: positiveInt;
         /**
          * Contains extended information for property 'limit'
          */
@@ -13202,7 +13202,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         /**
          * Order of the results
          */
-        sort: DataRequirementSort[];
+        sort?: DataRequirementSort[];
     }
     /**
      * The formal response to a guidance request
