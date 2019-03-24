@@ -7645,17 +7645,17 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
          */
         _code?: Element;
         /**
-         * Profile (StructureDefinition) to apply (or IG)
+         * Profile (StructureDefinition) to apply (or IG) - one must be apply
          */
-        profile?: canonical;
+        profile?: canonical[];
         /**
          * Contains extended information for property 'profile'.
          */
         _profile?: Element;
         /**
-         * Profile (StructureDefinition) to apply to reference target (or IG)
+         * 	Profile (StructureDefinition or IG) on the Reference/canonical target - one must apply
          */
-        targetProfile?: canonical;
+        targetProfile?: canonical[];
         /**
          * Contains extended information for property 'targetProfile'.
          */
@@ -7906,7 +7906,51 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         /**
          * Value of Example (one of allowed types)
          */
-        valueMeta?: Meta;
+        valueUuid?: uuid;
+        /**
+         * Value of Example (one of allowed types)
+         */
+        valueCanonical?: canonical;
+        /**
+         * Value of Example (one of allowed types)
+        */
+        valueUrl?: url;
+        /**
+         * Value of Example (one of allowed types)
+         */
+        valueContactDetail?: ContactDetail;
+        /**
+         * Value of Example (one of allowed types)
+         */
+        valueContributor?: Contributor;
+        /**
+         * Value of Example (one of allowed types)
+         */
+        valueDataRequirenment?: DataRequirement;
+        /**
+         * Value of Example (one of allowed types)
+         */
+        valueExpression?: Expression;
+        /**
+         * Value of Example (one of allowed types)
+         */
+        valueParameterDefinition?: ParameterDefinition;
+        /**
+         * Value of Example (one of allowed types)
+         */
+        valueRelatedArtifact?: RelatedArtifact;
+        /**
+         * Value of Example (one of allowed types)
+         */
+        valueTriggerDefinition?: TriggerDefinition;
+        /**
+         * Value of Example (one of allowed types)
+         */
+        valueUsageContext?: UsageContext;
+        /**
+         * Value of Example (one of allowed types)
+         */
+        valueDosage?: Dosage;
     }
     /**
      * Condition that must evaluate to true
@@ -7948,7 +7992,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         /**
          * FHIRPath expression of constraint
          */
-        expression: string;
+        expression?: string;
         /**
          * Contains extended information for property 'expression'.
          */
@@ -7994,15 +8038,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         /**
          * Source of value set
          */
-        valueSetUri?: uri;
-        /**
-         * Contains extended information for property 'valueSetUri'.
-         */
-        _valueSetUri?: Element;
-        /**
-         * Source of value set
-         */
-        valueSetReference?: Reference;
+        valueSet?: canonical;
     }
     /**
      * Map element to another set of definitions
@@ -8071,6 +8107,10 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
          * Contains extended information for property 'sliceName'.
          */
         _sliceName?: Element;
+        /**
+         * 	If this slice definition constrains an inherited slice definition (or not)
+         */
+        sliceIsContraining: boolean;
         /**
          * Name for element to display with or prompt for element
          */
@@ -8375,7 +8415,51 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         /**
          * Specified value if missing from instance
          */
-        defaultValueMeta?: Meta;
+        defaultValueCanonical?: canonical;
+        /**
+         * Specified value if missing from instance
+         */
+        defaultValueUrl?: url;
+        /**
+         * Specified value if missing from instance
+         */
+        defaultValueUuid?: uuid;
+        /**
+         * Specified value if missing from instance
+         */
+        defaultValueContactDetail?: ContactDetail;
+        /**
+         * Specified value if missing from instance
+         */
+        defaultValueContributor?: Contributor;
+        /**
+         * Specified value if missing from instance
+         */
+        defaultValueDataRequirenment?: DataRequirement;
+        /**
+         * Specified value if missing from instance
+         */
+        defaultValueExpression?: Expression;
+        /**
+         * Specified value if missing from instance
+         */
+        defaultValueParameterDefinition?: ParameterDefinition;
+        /**
+         * Specified value if missing from instance
+         */
+        defaultValueRelatedArtifact?: RelatedArtifact;
+        /**
+         * Specified value if missing from instance
+         */
+        defaultValueTriggerDefinition?: TriggerDefinition;
+        /**
+         * Specified value if missing from instance
+         */
+        defaultValueUsageContext?: UsageContext;
+        /**
+         * Specified value if missing from instance
+         */
+        defaultValueDosage?: Dosage;
         /**
          * Implicit meaning when this element is missing
          */
@@ -8607,7 +8691,51 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         /**
          * Value must be exactly this
          */
-        fixedMeta?: Meta;
+        fixedCanonical?: canonical;
+        /**
+         * Value must be exactly this
+         */
+        fixedUuid?: uuid;
+        /**
+         * Value must be exactly this
+         */
+        fixedUrl?: url;
+        /**
+         * Value must be exactly this
+         */
+        fixedContactDetail?: ContactDetail;
+        /**
+         * Value must be exactly this
+         */
+        fixedContributor?: Contributor;
+        /**
+         * Value must be exactly this
+         */
+        fixedDataRequirenment?: DataRequirement;
+        /**
+         * Value must be exactly this
+         */
+        fixedExpression?: Expression;
+        /**
+         * Value must be exactly this
+         */
+        fixedParameterDefinition?: ParameterDefinition;
+        /**
+         * Value must be exactly this
+         */
+        fixedRelatedArtifact?: RelatedArtifact;
+        /**
+         * Value must be exactly this
+         */
+        fixedTriggerDefinition?: TriggerDefinition;
+        /**
+         * Value must be exactly this
+         */
+        fixedUsageContext?: UsageContext;
+        /**
+         * Value must be exactly this
+         */
+        fixedDosage?: Dosage;
         /**
          * Value must have at least these property values
          */
@@ -8823,7 +8951,51 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         /**
          * Value must have at least these property values
          */
-        patternMeta?: Meta;
+        patternCanonical?: canonical;
+        /**
+         * Value must have at least these property values
+         */
+        patternUuid?: uuid;
+        /**
+         * Value must have at least these property values
+         */
+        patternUrl?: url;
+        /**
+         * Value must have at least these property values
+         */
+        patternContactDetail?: ContactDetail;
+        /**
+         * Value must have at least these property values
+         */
+        patternContributor?: Contributor;
+        /**
+         * Value must have at least these property values
+         */
+        patternDataRequirenment?: DataRequirement;
+        /**
+         * Value must have at least these property values
+         */
+        patternExpression?: Expression;
+        /**
+         * Value must have at least these property values
+         */
+        patternParameterDefinition?: ParameterDefinition;
+        /**
+         * Value must have at least these property values
+         */
+        patternRelatedArtifact?: RelatedArtifact;
+        /**
+         * Value must have at least these property values
+         */
+        patternTriggerDefinition?: TriggerDefinition;
+        /**
+         * Value must have at least these property values
+         */
+        patternUsageContext?: UsageContext;
+        /**
+         * Value must have at least these property values
+         */
+        patternDosage?: Dosage;
         /**
          * Example value (as defined for type)
          */
@@ -9001,6 +9173,14 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
          */
         _isModifier?: Element;
         /**
+         * Reason that this element is marked as a modifier
+         */
+        isModifierReason?: string;
+        /**
+         * Contains extended information for property 'isModifierReason'
+         */
+        _isModifierReason: Element;
+        /**
          * Include when _summary = true?
          */
         isSummary?: boolean;
@@ -9016,6 +9196,51 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
          * Map element to another set of definitions
          */
         mapping?: ElementDefinitionMapping[];
+    }
+    /**
+     * An expression that can be used to generate a value
+     */
+    interface Expression extends Element {
+        /**
+         * Natural language description of the condition
+         */
+        description?: string;
+        /**
+         * Contains extended information for property 'description'
+         */
+        _description?: Element;
+        /**
+         * Short name assigned to expression for reuse
+         */
+        name?: id;
+        /**
+         * Contains extended information for property 'name'
+         */
+        _name?: Element;
+        /**
+         * text/cql | text/fhirpath | application/x-fhir-query | etc.
+         */
+        language: code;
+        /**
+         * Contains extended information for property 'language'
+         */
+        _language?: Element;
+        /**
+         * 	Expression in specified language
+         */
+        expression?: string;
+        /**
+         * Contains extended information for property 'expression'
+         */
+        _expression?: Element;
+        /**
+         * Where the expression is found
+         */
+        reference?: uri;
+        /**
+         * Contains extended information for property 'reference'
+         */
+        _reference?: Element;
     }
     /**
      * Resource data element
