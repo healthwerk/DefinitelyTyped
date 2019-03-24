@@ -97,7 +97,8 @@ declare module fhir {
      */
     interface Address extends Element {
         /**
-         * home | work | temp | old - purpose of this address
+         * home | work | temp | old | billing - purpose of this address
+         * Required: http://hl7.org/fhir/ValueSet/address-use
          */
         use?: code;
         /**
@@ -106,6 +107,7 @@ declare module fhir {
         _use?: Element;
         /**
          * postal | physical | both
+         * Required: http://hl7.org/fhir/ValueSet/address-type
          */
         type?: code;
         /**
@@ -187,6 +189,7 @@ declare module fhir {
         _value?: Element;
         /**
          * < | <= | >= | > - how to understand the value
+         * Required: http://hl7.org/fhir/ValueSet/quantity-comparator
          */
         comparator?: code;
         /**
@@ -290,7 +293,8 @@ declare module fhir {
      */
     interface Identifier extends Element {
         /**
-         * usual | official | temp | secondary (If known)
+         * usual | official | temp | secondary | old (If known)
+         * Required: http://hl7.org/fhir/ValueSet/identifier-use
          */
         use?: code;
         /**
@@ -299,6 +303,7 @@ declare module fhir {
         _use?: Element;
         /**
          * Description of identifier
+         * Extensible: http://hl7.org/fhir/ValueSet/identifier-type
          */
         type?: CodeableConcept;
         /**
@@ -390,6 +395,7 @@ declare module fhir {
     interface Attachment extends Element {
         /**
          * Mime type of the content, with charset etc.
+         * Required: http://hl7.org/fhir/ValueSet/mimetypes
          */
         contentType?: code;
         /**
@@ -398,6 +404,8 @@ declare module fhir {
         _contentType?: Element;
         /**
          * Human language of the content (BCP-47)
+         * Preferred: http://hl7.org/fhir/ValueSet/languages
+         * Limit: http://hl7.org/fhir/ValueSet/all-languages
          */
         language?: code;
         /**
@@ -459,6 +467,7 @@ declare module fhir {
     interface ContactPoint extends Element {
         /**
          * phone | fax | email | pager | url | sms | other
+         * Required: http://hl7.org/fhir/ValueSet/contact-point-system
          */
         system?: code;
         /**
@@ -475,6 +484,7 @@ declare module fhir {
         _value?: Element;
         /**
          * home | work | temp | old | mobile - purpose of this contact point
+         * Required: http://hl7.org/fhir/ValueSet/contact-point-use
          */
         use?: code;
         /**
@@ -515,6 +525,7 @@ declare module fhir {
     interface HumanName extends Element {
         /**
          * usual | official | temp | nickname | anonymous | old | maiden
+         * Required: http://hl7.org/fhir/ValueSet/name-use
          */
         use?: code;
         /**
@@ -766,6 +777,7 @@ declare module fhir {
         _durationMax?: Element;
         /**
          * s | min | h | d | wk | mo | a - unit of time (UCUM)
+         * Required: http://hl7.org/fhir/ValueSet/units-of-time
          */
         durationUnit?: code;
         /**
@@ -806,6 +818,7 @@ declare module fhir {
         _periodMax?: Element;
         /**
          * s | min | h | d | wk | mo | a - unit of time (UCUM)
+         * Required: http://hl7.org/fhir/ValueSet/units-of-time
          */
         periodUnit?: code;
         /**
@@ -814,6 +827,7 @@ declare module fhir {
         _periodUnit?: Element;
         /**
          * mon | tue | wed | thu | fri | sat | sun
+         * Required: http://hl7.org/fhir/ValueSet/days-of-week
          */
         dayOfWeek?: code[];
         /**
@@ -830,6 +844,7 @@ declare module fhir {
         _timeOfDay?: Element[];
         /**
          * Regular life events the event is tied to
+         * Required: http://hl7.org/fhir/ValueSet/event-timing
          */
         when?: code[];
         /**
@@ -863,6 +878,7 @@ declare module fhir {
         repeat?: TimingRepeat;
         /**
          * BID | TID | QID | AM | PM | QD | QOD | Q4H | Q6H +
+         * Preferred: http://hl7.org/fhir/ValueSet/timing-abbreviation
          */
         code?: CodeableConcept;
     }
@@ -1204,6 +1220,7 @@ declare module fhir {
     interface Narrative extends Element {
         /**
          * generated | extensions | additional | empty
+         * Required: http://hl7.org/fhir/ValueSet/narrative-status
          */
         status: code;
         /**
@@ -1358,6 +1375,7 @@ declare module fhir {
     interface UsageContext extends Element {
         /**
          * Type of context being specified
+         * Extensible: http://hl7.org/fhir/ValueSet/usage-context-type
          */
         code: Coding;
         /**
@@ -1396,6 +1414,7 @@ declare module fhir {
     interface Contributor extends Element {
         /**
          * author | editor | reviewer | endorser
+         * Required: http://hl7.org/fhir/ValueSet/contributor-type
          */
         type: code;
         /**
@@ -1421,6 +1440,7 @@ declare module fhir {
     interface RelatedArtifact extends Element {
         /**
          * documentation | justification | citation | predecessor | successor | derived-from | depends-on | composed-of
+         * Required: http://hl7.org/fhir/ValueSet/related-artifact-type
          */
         type: code;
         /**
@@ -7515,6 +7535,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         _ordered?: Element;
         /**
          * closed | open | openAtEnd
+         * Required: http://hl7.org/fhir/ValueSet/resource-slicing-rules
          */
         rules: code;
         /**
@@ -7528,6 +7549,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
     interface ElementDefinitionSlicingDiscriminator extends Element {
         /**
          * value | exists | pattern | type | profile
+         * Requried: http://hl7.org/fhir/ValueSet/discriminator-type
          */
         type: code;
         /**
@@ -7578,6 +7600,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
     interface ElementDefinitionType extends Element {
         /**
          * Data type or Resource (reference to definition)
+         * Extensible: http://hl7.org/fhir/ValueSet/defined-types
          */
         code: uri;
         /**
@@ -7602,6 +7625,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         _targetProfile?: Element;
         /**
          * contained | referenced | bundled - how aggregated
+         * Required: http://hl7.org/fhir/ValueSet/resource-aggregation-mode
          */
         aggregation?: code[];
         /**
@@ -7610,6 +7634,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         _aggregation?: Element[];
         /**
          * either | independent | specific
+         * Required: http://hl7.org/fhir/ValueSet/reference-version-rules
          */
         versioning?: code;
         /**
@@ -7868,6 +7893,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         _requirements?: Element;
         /**
          * error | warning
+         * Required: http://hl7.org/fhir/ValueSet/constraint-severity
          */
         severity: code;
         /**
@@ -7913,6 +7939,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
     interface ElementDefinitionBinding extends Element {
         /**
          * required | extensible | preferred | example
+         * Required: http://hl7.org/fhir/ValueSet/binding-strength
          */
         strength: code;
         /**
@@ -7954,6 +7981,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         _identity?: Element;
         /**
          * Computable language of mapping
+         * Required: http://hl7.org/fhir/ValueSet/mimetypes
          */
         language?: code;
         /**
@@ -7991,6 +8019,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         _path?: Element;
         /**
          * xmlAttr | xmlText | typeAttr | cdaText | xhtml
+         * Required: http://hl7.org/fhir/ValueSet/property-representation
          */
         representation?: code[];
         /**
@@ -8015,6 +8044,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         _label?: Element;
         /**
          * Corresponding codes in terminologies
+         * Example: http://hl7.org/fhir/ValueSet/observation-codes
          */
         code?: Coding[];
         /**
@@ -12834,7 +12864,8 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
      */
     interface DataRequirement extends Element {
         /**
-         * The type of the required data
+         * The type of the required data. All Fhir types.
+         * Required: http://hl7.org/fhir/ValueSet/all-types
          */
         type: code;
         /**
@@ -14094,6 +14125,7 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         _name?: Element;
         /**
          * in | out
+         * Required: http://hl7.org/fhir/ValueSet/operation-parameter-use
          */
         use: code;
         /**
@@ -14125,7 +14157,8 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
          */
         _documentation?: Element;
         /**
-         * What type of value
+         * What type of value. All Fhir types
+         * Required: http://hl7.org/fhir/ValueSet/all-types
          */
         type: code;
         /**
@@ -18277,7 +18310,8 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
      */
     interface TriggerDefinition extends Element {
         /**
-         * named-event | periodic | data-added | data-modified | data-removed | data-accessed | data-access-ended
+         * named-event | periodic | data-changed | data-added | data-modified | data-removed | data-accessed | data-access-ended
+         * Required: 	http://hl7.org/fhir/ValueSet/trigger-type
          */
         type: code;
         /**
