@@ -1498,6 +1498,59 @@ declare module fhir {
         role?: CodeableConcept;
     }
     /**
+     * Amount of medication administered
+     */
+    interface DosageDoseAndRate extends Element {
+        /**
+         * The kind of dose or rate specified
+         */
+        type?: CodeableConcept;
+        /**
+         * Contains extended information for property 'type'
+         */
+        _type: Element;
+        /**
+         * Amount of medication per dose
+         */
+        doseRange?: Range;
+        /**
+         * Contains extended information for property 'doseRange'
+         */
+        _doseRange: Element;
+        /**
+         * Amount of medication per dose
+         */
+        doseQuantity?: SimpleQuantity;
+        /**
+         * Contains extended information for property 'doseQuantity'
+         */
+        _doseQuantity: Element;
+        /**
+         * Amount of medication per unit of time
+         */
+        rateRatio?: Ratio;
+        /**
+         * Contains extended information for property 'rateRatio'
+         */
+        _rateRatio: Element;
+        /**
+         * Amount of medication per unit of time
+         */
+        rateRange?: Range;
+        /**
+         * Contains extended information for property 'rateRange'
+         */
+        _rateRange: Element;
+        /**
+         * Amount of medication per unit of time
+         */
+        rateQuantity?: SimpleQuantity;
+        /**
+         * Contains extended information for property 'rateQuantity'
+         */
+        _rateQuantity: Element;
+    }
+    /**
      * How the medication is/was taken or should be taken
      */
     interface Dosage extends Element {
@@ -1558,13 +1611,9 @@ declare module fhir {
          */
         method?: CodeableConcept;
         /**
-         * Amount of medication per dose
+         * Amount of medication administered
          */
-        doseRange?: Range;
-        /**
-         * Amount of medication per dose
-         */
-        doseQuantity?: Quantity;
+        doseAndRate?: DosageDoseAndRate[]; 
         /**
          * Upper limit on medication per unit of time
          */
@@ -1577,18 +1626,6 @@ declare module fhir {
          * Upper limit on medication per lifetime of the patient
          */
         maxDosePerLifetime?: Quantity;
-        /**
-         * Amount of medication per unit of time
-         */
-        rateRatio?: Ratio;
-        /**
-         * Amount of medication per unit of time
-         */
-        rateRange?: Range;
-        /**
-         * Amount of medication per unit of time
-         */
-        rateQuantity?: Quantity;
     }
     /**
      * Dynamic aspects of the definition
