@@ -349,6 +349,15 @@ declare module fhir {
          */
         _reference?: Element;
         /**
+         * Type the reference refers to (e.g. "Patient")
+         * Extensible: http://hl7.org/fhir/ValueSet/resource-types
+         */
+        type?: uri;
+        /**
+         * Contains extended information for property 'type'
+         */
+        _type?: Element;
+        /**
          * Logical reference, when literal reference is not known
          */
         identifier?: Identifier;
