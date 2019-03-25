@@ -19873,6 +19873,43 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         _scoring?: Element;
     }
     /**
+     * The shelf-life and storage information for a medicinal product or container can be described using this class
+     */
+    interface ProductShelfLife extends BackboneElement {
+        /**
+         * Unique identifier for the packaged Medicinal Product
+         */
+        identifier?: Identifier;
+        /**
+         * Contains extended information for property 'identifier'
+         */
+        _identifier?: Element;
+        /**
+         * This describes the shelf life, taking into account various scenarios such as shelf life of the packaged 
+         */
+        type: CodeableConcept;
+        /**
+         * Contains extended information for property 'type'
+         */
+        _type?: Element;
+        /**
+         * The shelf life time period can be specified using a numerical value for the period of time and its unit of time measurement
+         */
+        period: Quantity;
+        /**
+         * Contains extended information for property 'period'
+         */
+        _period?: Element;
+        /**
+         * Special precautions for storage, if any
+         */
+        specialPrecautionsForStorage?: CodeableConcept[];
+        /**
+         * Contains extended information for property 'specialPrecautionsForStorage'
+         */
+        _specialPrecautionsForStorage?: Element;
+    }
+    /**
      * Actor involved
      */
     interface ProvenanceAgent extends BackboneElement {
