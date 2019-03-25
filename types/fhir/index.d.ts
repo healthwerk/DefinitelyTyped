@@ -19025,6 +19025,51 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         action?: PlanDefinitionAction[];
     }
     /**
+     * Definition of a set of people that apply to some clinically related context
+     */
+    interface Population extends BackboneElement {
+        /**
+         * The age of the specific population
+         */
+        ageRange?: Range;
+        /**
+         * Contains extended information for property 'ageRange'
+         */
+        _ageRange?: Element;
+        /**
+         * The age of the specific population
+         */
+        ageCodeableConcept?: CodeableConcept;
+        /**
+         * Contains extended information for porperty 'ageCodeableConcept'
+         */
+        _ageCodeableConcept?: Element;
+        /**
+         * The gender of the specific population
+         */
+        gender?: CodeableConcept;
+        /**
+         * Contains extended information for property 'gender'
+         */
+        _gender?: Element;
+        /**
+         * Race of the specific population
+         */
+        race?: CodeableConcept;
+        /**
+         * Contains extended information for property 'race'
+         */
+        _race?: Element;
+        /**
+         * The existing physiological conditions of the specific population to which this applies
+         */
+        physiologicalCondition?: CodeableConcept;
+        /**
+         * Contains extended information for property 'physiologicalCondition'
+         */
+        _physiologicalCondition?: Element;
+    }
+    /**
      * Qualifications obtained by training and certification
      */
     interface PractitionerQualification extends BackboneElement {
