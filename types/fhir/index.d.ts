@@ -18829,6 +18829,14 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
          * Triggering data of the event
          */
         eventData?: DataRequirement;
+        /**
+         * Whether the event triggers (boolean expression)
+         */
+        condition?: Expression;
+        /**
+         * Contains extended information for porperty 'condition'
+         */
+        _condition?: Element;
     }
     /**
      * Whether or not the action is applicable
