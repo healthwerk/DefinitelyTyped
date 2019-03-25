@@ -720,43 +720,43 @@ declare module fhir {
         /**
          * Who signed
          */
-        whoUri?: uri;
+        who: Reference;
         /**
-         * Contains extended information for property 'whoUri'.
+         * Contains extended information for property 'who'
          */
-        _whoUri?: Element;
-        /**
-         * Who signed
-         */
-        whoReference?: Reference;
+        _who?: Element;
         /**
          * The party represented
          */
-        onBehalfOfUri?: uri;
+        onBehalfOf?: Reference;
         /**
-         * Contains extended information for property 'onBehalfOfUri'.
+         * Contains extended information for property 'onBehalfOf'
          */
-        _onBehalfOfUri?: Element;
+        _onBehalfOf?: Element;
         /**
-         * The party represented
+         * The technical format of the signed resources
          */
-        onBehalfOfReference?: Reference;
+        targetFormat?: code;
+        /**
+         * Contains extended information for property 'targetFormat'
+         */
+        _targetFormat?: Element;
         /**
          * The technical format of the signature
          */
-        contentType?: code;
+        sigFormat?: code;
         /**
-         * Contains extended information for property 'contentType'.
+         * Contains extended information for porperty 'sigFormat'
          */
-        _contentType?: Element;
+        _sigFormat?: Element;
         /**
          * The actual signature content (XML DigSig. JWT, picture, etc.)
          */
-        blob?: base64Binary;
+        data?: base64Binary;
         /**
-         * Contains extended information for property 'blob'.
+         * Contains extended information for property 'data'.
          */
-        _blob?: Element;
+        _data?: Element;
     }
     /**
      * When the event is to occur
