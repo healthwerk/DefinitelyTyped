@@ -1487,6 +1487,14 @@ declare module fhir {
          */
         _type?: Element;
         /**
+         * Short label
+         */
+        label?: string;
+        /**
+         * Contains extended information for property 'label'
+         */
+        _label?: Element
+        /**
          * Brief description of the related artifact
          */
         display?: string;
