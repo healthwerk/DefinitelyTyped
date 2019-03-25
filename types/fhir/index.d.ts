@@ -14897,6 +14897,53 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         endpoint?: Reference[];
     }
     /**
+     * The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available
+     */
+    interface MarketingStatus extends BackboneElement {
+        /**
+         * The country in which the marketing authorisation has been granted
+         * It should be specified using the ISO 3166 ‑ 1 alpha-2 code elements
+         */
+        country: CodeableConcept;
+        /**
+         * Contains extended information for property 'country'
+         */
+        _country?: Element;
+        /**
+         * Where a Medicines Regulatory Agency has granted a marketing authorisation for which specific provisions within a jurisdiction apply
+         */
+        jurisdiction?: CodeableConcept;
+        /**
+         * Contains extended information for property 'jurisdiction'
+         */
+        _jurisdiction?: Element;
+        /**
+         * This attribute provides information on the status of the marketing of the medicinal product
+         * See ISO/TS 20443 for more information
+         */
+        status: CodeableConcept;
+        /**
+         * Contains extended information for property 'status'
+         */
+        _status?: Element;
+        /**
+         * The date when the Medicinal Product is placed on the market by the Marketing Authorisation Holder 
+         */
+        dateRange: Period;
+        /**
+         * Contains extended information for property 'dateRange'
+         */
+        _dateRange?: Element;
+        /**
+         * The date when the Medicinal Product is placed on the market by the Marketing Authorisation Holder 
+         */
+        restoreDate?: dateTime;
+        /**
+         * Contains extended information for property 'restoreDate'
+         */
+        _restoreDate?: Element;
+    }
+    /**
      * Population criteria group
      */
     interface MeasureGroup extends BackboneElement {
