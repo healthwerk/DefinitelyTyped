@@ -1157,6 +1157,14 @@ declare module fhir {
          */
         _lastUpdated?: Element;
         /**
+         * A uri that identifies the source system of the resource.
+         */
+        source?: uri;
+        /**
+         * Contains extended information for property 'source'
+         */
+        _source?: Element
+        /**
          * Profiles this resource claims to conform to
          */
         profile?: canonical[];
