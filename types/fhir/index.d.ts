@@ -580,7 +580,24 @@ declare module fhir {
     /**
      * An amount of economic utility in some recognized currency
      */
-    interface Money extends Quantity {
+    interface Money extends Element {
+        /**
+         * Numerical value (with implicit precision)
+         */
+        value?: decimal;
+        /**
+         * Contains extended information for property 'value'.
+         */
+        _value?: Element;
+        /**
+         * ISO 4217 Currency Code
+         * Required: http://hl7.org/fhir/ValueSet/currencies
+         */
+        currency?: code;
+        /**
+         * Contains extended information for property 'currency'.
+         */
+        _currency?: Element;
     }
     /**
      * A fixed quantity (no comparator)
