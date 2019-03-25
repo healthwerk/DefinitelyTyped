@@ -759,6 +759,80 @@ declare module fhir {
         _data?: Element;
     }
     /**
+     * 	Reference range of possible or expected values
+     */
+    interface SubstanceAmountReferenceRange extends Element {
+        /**
+         * Lower limit possibel or expected
+         */
+        lowLimit?: Quantity;
+        /**
+         * Contains extended information for property 'lowLimit'.
+         */
+        _lowLimit?: Element;
+        /** 
+         * Upper limit possible or expected
+         */
+        highLimit?: Quantity;
+        /**
+         * Contains extended information for property 'highLimit'.
+         */
+        _highLimit?: Element;
+    }
+    /**
+     * Chemical substances are a single substance type whose primary defining element is the molecular structure.
+     */
+    interface SubstanceAmount extends BackboneElement {
+        /**
+         * Used to capture quantitative values for a variety of elements.
+         */
+        amountQuantity?: Quantity;
+        /**
+         * Contains extended information for property 'amountQuantity'.
+         */
+        _amountQuantity?: Element;
+        /**
+         * Used to capture quantitative values for a variety of elements.
+         */
+        amountRange?: Range;
+        /**
+         * Contains extended information for property 'amountRange'.
+         */
+        _amountRange?: Element;
+        /**
+         * Used to capture quantitative values for a variety of elements.
+         */
+        amountString?: string;
+        /**
+         * Contains extended information for property 'amountString'.
+         */
+        _amountString?: Element;
+        /**
+         * Most elements that require a quantitative value will also have a field called amount type
+         */
+        amountType?: CodeableConcept;
+        /**
+         * Contains extended information for property 'amountType'.
+         */
+        _amountType?: Element;
+        /**
+         * A textual comment on a numeric value
+         */
+        amountText?: string
+        /**
+         * Contains extended information for property 'amountText'.
+         */
+        _amountText?: Element;
+        /**
+         * 	Reference range of possible or expected values
+         */
+        referenceRange?:  SubstanceAmountReferenceRange
+        /**
+         * Contains extended information for property 'referenceRange'.
+         */
+        _referenceRange?: Element;
+    }
+    /**
      * When the event is to occur
      */
     interface TimingRepeat extends Element {
