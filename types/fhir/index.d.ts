@@ -222,6 +222,11 @@ declare module fhir {
         _code?: Element;
     }
     /**
+     * Money represented as the numerator or denominator in a Ratio
+     */
+    interface MoneyQuantity extends Quantity {
+    }
+    /**
      * A duration of time during which an organism (or a process) has existed
      */
     interface Age extends Quantity {
