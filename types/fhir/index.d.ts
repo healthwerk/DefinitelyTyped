@@ -19780,6 +19780,99 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
         communicationRequest?: Reference[];
     }
     /**
+     * The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available
+     */
+    interface ProdCharacteristic extends BackboneElement {
+        /**
+         * Where applicable, the height can be specified using a numerical value and its unit of measurement
+         */
+        height?: Quantity;
+        /**
+         * Contains extended information for property 'height'.
+         */
+        _height?: Element;
+        /**
+         * 	Where applicable, the width can be specified using a numerical value and its unit of measurement
+         */
+        width?: Quantity;
+        /**
+         * Contains extended information for property 'width'.
+         */
+        _width?: Element;
+        /**
+         * Where applicable, the depth can be specified using a numerical value and its unit of measurement
+         */
+        depth?: Quantity;
+        /**
+         * Contains extended information for property 'depth'.
+         */
+        _depth?: Element;
+        /**
+         * Where applicable, the weight can be specified using a numerical value and its unit of measurement
+         */
+        weight?: Quantity;
+        /**
+         * Contains extended information for property 'weight'.
+         */
+        _weight?: Element;
+        /**
+         * Where applicable, the nominal volume can be specified using a numerical value and its unit of measurement
+         */
+        nominalValue?: Quantity;
+        /**
+         * Contains extended information for property 'nominalValue'.
+         */
+        _nominalValue?: Element;
+        /**
+         * Where applicable, the external diameter can be specified using a numerical value and its unit of measurement
+         */
+        externalDiameter?: Quantity;
+        /**
+         * Contains extended information for property 'externalDiameter'.
+         */
+        _externalDiameter?: Element;
+        /**
+         * Where applicable, the shape can be specified 
+         */
+        shape?: string;
+        /**
+         * Contains extended information for property 'shape'.
+         */
+        _shape?: Element;
+        /**
+         * Where applicable, the color can be specified
+         */
+        color?: string[];
+        /**
+         * Contains extended information for property 'color'
+         */
+        _color?: Element;
+        /**
+         * Where applicable, the imprint can be specified as text
+         */
+        imprint?: string[];
+        /**
+         * Contains extended information for property 'imprint'
+         */
+        _imprint?: Element;
+        /**
+         * Where applicable, the image can be provided 
+         */
+        image?: Attachment[];
+        /**
+         * Contains extended information for property 'image'
+         */
+        _image?: Element;
+        /**
+         * Where applicable, the scoring can be specified 
+         */
+        scoring?: CodeableConcept;
+        /**
+         * Contains extended information for property 'scoring'
+         */
+        _scoring?: Element;
+    }
+    /**
      * Actor involved
      */
     interface ProvenanceAgent extends BackboneElement {
