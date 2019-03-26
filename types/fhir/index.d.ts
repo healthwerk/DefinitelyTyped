@@ -2897,6 +2897,183 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _content?: Element;
     }
     /**
+     * 	How this product was collected
+     */
+    interface BiologicallyDerivedProductCollection extends BackboneElement {
+        /**
+         * Individual performing collection (Practitioner | PractitionerRole)
+         */
+        collector?: Reference;
+        /**
+         * Who is producr from (Patient | Organization)
+         */
+        source?: Reference;
+        /**
+         * Time of product collection
+         */
+        collectedDateTime?: dateTime;
+        /**
+         * Contains extended information for property 'collectedDateTime'
+         */
+        _collectedDateTime?: Element;
+        /**
+         * Time of product collection
+         */
+        collectedPeriod?: Period;
+    }
+    /**
+     * Any processing of the product during collection
+     */
+    interface BiologicallyDerivedProductProcessing extends BackboneElement {
+        /**
+         * Description of processing
+         */
+        description?: string;
+        /**
+         * Contains extended information for property 'description'
+         */
+        _description?: Element;
+        /**
+         * Procesing code
+         * Example: http://hl7.org/fhir/ValueSet/procedure-code
+         */
+        procedure?: CodeableConcept;
+        /**
+         * Substance added during processing
+         */
+        additive?: Reference;
+        /**
+         * Time of processing
+         */
+        timeDateTime?: dateTime;
+        /**
+         * Contains extended information for property 'timeDateTime'
+         */
+        _timeDateTime?: Element;
+        /**
+         * Time of processing
+         */
+        timePeriod?: Period;
+    }
+    /**
+     * Any manipulation of product post-collection
+     */
+    interface BiologicallyDerivedProductManipulation extends BackboneElement {
+        /**
+         * Description of manipulation
+         */
+        description?: string;
+        /**
+         * Contains extended information for property 'description'
+         */
+        _description?: Element;
+        /**
+         * Time of manipulation
+         */
+        timeDateTime?: dateTime;
+        /**
+         * Contains extended information for property 'timeDateTime'
+         */
+        _timeDateTime?: Element;
+        /**
+         * Time of manipulation
+         */
+        timePeriod?: Period;
+    }
+    /**
+     * Product storage
+     */
+    interface BiologicallyDerivedProductStorage extends BackboneElement {
+        /**
+         * Description of storage
+         */
+        description?: string;
+        /**
+         * Contains extended information for property 'description'
+         */
+        _description?: Element;
+        /**
+         * Storage temperature
+         */
+        temperature?: decimal;
+        /**
+         * Contains extended information for porperty 'temperature'
+         */
+        _temeperature?: Element;
+        /**
+         * 	farenheit | celsius | kelvin
+         * Required: http://hl7.org/fhir/ValueSet/product-storage-scale
+         */
+        scale?: code;
+        /**
+         * Contains extended information for porperty 'scale'
+         */
+        _scale?: Element;
+        /**
+         * Storage timeperiod
+         */
+        duration?: Period;
+    }
+    /**
+     * 	A material substance originating from a biological entity
+     */
+    interface BiologicallyDerivedProduct extends DomainResource {
+        /**
+         * External ids for this item
+         */
+        identifier?: Identifier[];
+        /**
+         * organ | tissue | fluid | cells | biologicalAgent
+         * Required: http://hl7.org/fhir/ValueSet/product-category 
+         */ 
+        productCategory?: code;
+        /**
+         * What this biologically derived product is
+         */
+        productCode?: CodeableConcept;
+        /**
+         * available | unavailable
+         * Required: http://hl7.org/fhir/ValueSet/product-status
+         */
+        status?: code;
+        /**
+         * Contains extended information for property 'status'
+         */
+        _status?: Element;
+        /**
+         * Product request (ServiceRequest)
+         */
+        request?: Reference[];
+        /**
+         * The amount of this biologically derived product
+         */
+        quantity?: integer;
+        /**
+         * Contains extended information for property 'quantity'
+         */
+        _quantity?: Element;
+        /**
+         * BiologicallyDerivedProduct parent
+         */
+        parent?: Reference[];
+        /**
+         * How this product was collected
+         */
+        collection?: BiologicallyDerivedProductCollection;
+        /**
+         * Any processing of the product during collection
+         */
+        processing?: BiologicallyDerivedProductProcessing[];
+        /**
+         * Any manipulation of product post-collection
+         */
+        manipulation?: BiologicallyDerivedProductManipulation;
+        /**
+         * Product storage
+         */
+        storage?: BiologicallyDerivedProductStorage[];
+    }
+    /**
      * Specific and identified anatomical location
      */
     interface BodySite extends DomainResource {
