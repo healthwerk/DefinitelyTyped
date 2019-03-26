@@ -2041,6 +2041,27 @@ declare module fhir {
         dynamicValue?: ActivityDefinitionDynamicValue[];
     }
     /**
+     * Information on the possible cause of the event
+     */
+    interface AdverseEventSuspectEntityCausality extends BackboneElement {
+        /**
+         * Assessment of if the entity caused the event
+         */
+        assessment?: CodeableConcept;
+        /**
+         * 	AdverseEvent.suspectEntity.causalityProductRelatedness
+         */
+        productRelatedness?: string;
+        /**
+         * AdverseEvent.suspectEntity.causalityAuthor
+         */
+        author?: Reference;
+        /**
+         * 	ProbabilityScale | Bayesian | Checklist
+         */
+        method?: CodeableConcept;
+    }
+    /**
      * The suspected agent causing the adverse event
      */
     interface AdverseEventSuspectEntity extends BackboneElement {
@@ -2051,35 +2072,11 @@ declare module fhir {
         /**
          * causality1 | causality2
          */
-        causality?: code;
+        causality?: AdverseEventSuspectEntityCausality[];
         /**
          * Contains extended information for property 'causality'.
          */
         _causality?: Element;
-        /**
-         * assess1 | assess2
-         */
-        causalityAssessment?: CodeableConcept;
-        /**
-         * AdverseEvent.suspectEntity.causalityProductRelatedness
-         */
-        causalityProductRelatedness?: string;
-        /**
-         * Contains extended information for property 'causalityProductRelatedness'.
-         */
-        _causalityProductRelatedness?: Element;
-        /**
-         * method1 | method2
-         */
-        causalityMethod?: CodeableConcept;
-        /**
-         * AdverseEvent.suspectEntity.causalityAuthor
-         */
-        causalityAuthor?: Reference;
-        /**
-         * result1 | result2
-         */
-        causalityResult?: CodeableConcept;
     }
     /**
      * Medical care, research study or other healthcare event causing physical injury
@@ -2090,22 +2087,32 @@ declare module fhir {
          */
         identifier?: Identifier;
         /**
+         * actual | potential
+         * Required: http://hl7.org/fhir/ValueSet/adverse-event-actuality
+         */
+        actuality: code;
+        /**
          * AE | PAE 
 An adverse event is an event that caused harm to a patient,  an adverse reaction is a something that is a subject-specific event that is a result of an exposure to a medication, food, device or environmental substance, a potential adverse event is something that occurred and that could have caused harm to a patient but did not
+Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         category?: code;
+        /**
+         * Type of the event itself in relation to the subject
+         */
+        event?: CodeableConcept;
         /**
          * Contains extended information for property 'category'.
          */
         _category?: Element;
         /**
-         * actual | potential
-         */
-        type?: CodeableConcept;
-        /**
          * Subject or group impacted by event
          */
-        subject?: Reference;
+        subject: Reference;
+        /**
+         * Encounter created as part of
+         */
+        encounter?: Reference;
         /**
          * When the event occurred
          */
@@ -2115,19 +2122,34 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
          */
         _date?: Element;
         /**
-         * Adverse Reaction Events linked to exposure to substance
+         * When the event was detected
          */
-        reaction?: Reference[];
+        detected?: dateTime;
+        /**
+         * When the event was recorded
+         */
+        recordedDate?: dateTime;
+        /**
+         * Effect on the subject due to this event
+         */
+        resultingCondition?: Reference[];
         /**
          * Location where adverse event occurred
          */
         location?: Reference;
         /**
-         * Mild | Moderate | Severe
+         * Seriousness of the event
+         * Example: http://hl7.org/fhir/ValueSet/adverse-event-seriousness
          */
         seriousness?: CodeableConcept;
         /**
+         * mild | moderate | severe
+         * Required: http://hl7.org/fhir/ValueSet/adverse-event-severity
+         */
+        severity?: CodeableConcept;
+        /**
          * resolved | recovering | ongoing | resolvedWithSequelae | fatal | unknown
+         * Required: http://hl7.org/fhir/ValueSet/adverse-event-outcome
          */
         outcome?: CodeableConcept;
         /**
@@ -2135,13 +2157,9 @@ An adverse event is an event that caused harm to a patient,  an adverse reaction
          */
         recorder?: Reference;
         /**
-         * Who  was involved in the adverse event or the potential adverse event
+         * Who was involved in the adverse event or the potential adverse event
          */
-        eventParticipant?: Reference;
-        /**
-         * Description of the adverse event
-         */
-        description?: string;
+        contributor?: Reference[];
         /**
          * Contains extended information for property 'description'.
          */
