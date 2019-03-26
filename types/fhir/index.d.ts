@@ -2548,6 +2548,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         actor?: Reference;
         /**
          * accepted | declined | tentative | in-process | completed | needs-action | entered-in-error
+         * Required: http://hl7.org/fhir/ValueSet/participationstatus
          */
         participantStatus: code;
         /**
