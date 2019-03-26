@@ -2367,6 +2367,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         actor?: Reference;
         /**
          * required | optional | information-only
+         * Required: http://hl7.org/fhir/ValueSet/participantrequired
          */
         required?: code;
         /**
@@ -2375,12 +2376,17 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _required?: Element;
         /**
          * accepted | declined | tentative | needs-action
+         * Required: http://hl7.org/fhir/ValueSet/participationstatus
          */
         status: code;
         /**
          * Contains extended information for property 'status'.
          */
         _status?: Element;
+        /**
+         * 	Participation period of the actor
+         */
+        period?: Period;
     }
     /**
      * A booking of a healthcare event among patient(s), practitioner(s), related person(s) and/or device(s) for a specific date/time. This may result in one or more Encounter(s)
@@ -2391,7 +2397,8 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         identifier?: Identifier[];
         /**
-         * proposed | pending | booked | arrived | fulfilled | cancelled | noshow | entered-in-error
+         * proposed | pending | booked | arrived | fulfilled | cancelled | noshow | entered-in-error | checked-in | waitlist
+         * Required: http://hl7.org/fhir/ValueSet/appointmentstatus
          */
         status: code;
         /**
@@ -2399,9 +2406,13 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         _status?: Element;
         /**
+         * The coded reason for the appointment being cancelled
+         */
+        cancelationReason?: CodeableConcept;
+        /**
          * A broad categorisation of the service that is to be performed during this appointment
          */
-        serviceCategory?: CodeableConcept;
+        serviceCategory?: CodeableConcept[];
         /**
          * The specific service that is to be performed during this appointment
          */
@@ -2417,11 +2428,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Reason this appointment is scheduled
          */
-        reason?: CodeableConcept[];
+        reasonCode?: CodeableConcept[];
         /**
-         * Reason the appointment is to takes place (resource)
+         * Resason the appointment is to take place (resource)
          */
-        indication?: Reference[];
+        reasonReference?: Reference[];
         /**
          * Used to make informed decisions if needing to re-prioritize
          */
@@ -2487,9 +2498,9 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         _comment?: Element;
         /**
-         * The ReferralRequest provided as information to allocate to the Encounter
+         * Detailed information and instructions for the patient
          */
-        incomingReferral?: Reference[];
+        patientInstruction?: string;
         /**
          * Participants involved in appointment
          */
