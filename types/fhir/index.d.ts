@@ -2323,11 +2323,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Date record was believed accurate
          */
-        assertedDate?: dateTime;
+        recordedDate?: dateTime;
         /**
          * Contains extended information for property 'assertedDate'.
          */
-        _assertedDate?: Element;
+        _recordedDate?: Element;
         /**
          * Who recorded the sensitivity
          */
