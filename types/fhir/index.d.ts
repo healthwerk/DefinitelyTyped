@@ -1427,14 +1427,16 @@ declare module fhir {
         identifier?: Identifier[];
         /**
          * active | inactive | entered-in-error
+         * Required: http://hl7.org/fhir/ValueSet/account-status
          */
-        status?: code;
+        status: code;
         /**
          * Contains extended information for property 'status'.
          */
         _status?: Element;
         /**
          * E.g. patient, expense, depreciation
+         * Example: http://hl7.org/fhir/ValueSet/account-type
          */
         type?: CodeableConcept;
         /**
@@ -1448,19 +1450,11 @@ declare module fhir {
         /**
          * What is account tied to?
          */
-        subject?: Reference;
+        subject?: Reference[];
         /**
          * Transaction window
          */
-        period?: Period;
-        /**
-         * Time window that transactions may be posted to this account
-         */
-        active?: Period;
-        /**
-         * How much is in account?
-         */
-        balance?: Money;
+        servicePeriod?: Period;
         /**
          * The party(s) that are responsible for covering the payment of this account, and what order should they be applied to the account
          */
@@ -1481,6 +1475,10 @@ declare module fhir {
          * Responsible for the account
          */
         guarantor?: AccountGuarantor[];
+        /**
+         * Reference to a parent Account
+         */
+        partOf?: Reference
     }
     /**
      * Describes the context of use for a conformance or knowledge resource
