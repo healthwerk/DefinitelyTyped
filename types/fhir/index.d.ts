@@ -1751,33 +1751,17 @@ declare module fhir {
      */
     interface ActivityDefinitionDynamicValue extends BackboneElement {
         /**
-         * Natural language description of the dynamic value
-         */
-        description?: string;
-        /**
-         * Contains extended information for property 'description'.
-         */
-        _description?: Element;
-        /**
          * The path to the element to be set dynamically
          */
-        path?: string;
+        path: string;
         /**
          * Contains extended information for property 'path'.
          */
         _path?: Element;
         /**
-         * Language of the expression
-         */
-        language?: string;
-        /**
-         * Contains extended information for property 'language'.
-         */
-        _language?: Element;
-        /**
          * An expression that provides the dynamic value for the customization
          */
-        expression?: string;
+        expression: Expression;
         /**
          * Contains extended information for property 'expression'.
          */
@@ -1824,7 +1808,16 @@ declare module fhir {
          */
         _title?: Element;
         /**
+         * Subordinate title of the activity definition
+         */
+        subtitle?: string;
+        /**
+         * Contains extended information for property 'subtitle'
+         */
+        _subtitle?: Element;
+        /**
          * draft | active | retired | unknown
+         * Required: http://hl7.org/fhir/ValueSet/publication-status
          */
         status: code;
         /**
@@ -1839,6 +1832,14 @@ declare module fhir {
          * Contains extended information for property 'experimental'.
          */
         _experimental?: Element;
+        /**
+         * Type of individual the activity definition is intended for
+         */
+        subjectCodeableConcept?: CodeableConcept;
+        /**
+         * Type of individual the activity definition is intended for
+         */
+        subjectReference?: Reference;
         /**
          * Date this was last changed
          */
@@ -1912,9 +1913,21 @@ declare module fhir {
          */
         topic?: CodeableConcept[];
         /**
-         * A content contributor
+         * Who authored the content
          */
-        contributor?: Contributor[];
+        author?: ContactDetail[];
+        /**
+         * Who edited the content
+         */
+        editor?: ContactDetail[];
+        /**
+         * Who reviewed the content
+         */
+        reviewer?: ContactDetail[];
+        /**
+         * Who endorsed the content
+         */
+        endorser?: ContactDetail[];
         /**
          * Contact details for the publisher
          */
@@ -1934,19 +1947,34 @@ declare module fhir {
         /**
          * Logic used by the asset
          */
-        library?: Reference[];
+        library?: canonical[];
         /**
          * Kind of resource
          */
         kind?: code;
         /**
          * Contains extended information for property 'kind'.
+         * Required: http://hl7.org/fhir/ValueSet/resource-types
          */
         _kind?: Element;
         /**
          * Detail type of activity
          */
         code?: CodeableConcept;
+        /**
+         * proposal | plan | order
+         * Required: http://hl7.org/fhir/ValueSet/request-intent
+         */
+        intent?: code;
+        /**
+         * routine | urgent | asap | stat
+         * Required: http://hl7.org/fhir/ValueSet/request-priority
+         */
+        priority?: code;
+        /**
+         * 	True if the activity should not be performed
+         */
+        doNotPerform?: boolean;
         /**
          * When activity is to occur
          */
@@ -1967,6 +1995,14 @@ declare module fhir {
          * When activity is to occur
          */
         timingRange?: Range;
+        /**
+         * When activity is to occur
+         */
+        timingAge?: Age;
+        /**
+         * When activity is to occur
+         */
+        timingDuration?: Duration;
         /**
          * Where it should happen
          */
@@ -1998,7 +2034,7 @@ declare module fhir {
         /**
          * Transform to apply the template
          */
-        transform?: Reference;
+        transform?: canonical;
         /**
          * Dynamic aspects of the definition
          */
