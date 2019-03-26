@@ -3115,6 +3115,54 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         patient: Reference;
     }
     /**
+     * Specific and identified anatomical structure
+     */
+    interface BodyStructure extends DomainResource {
+        /**
+         * Bodystructure identifier
+         */
+        identifier?: Identifier[];
+        /**
+         * Whether this record is in active use
+         */
+        active?: boolean;
+        /**
+         * Contains extended information for property 'active'
+         */
+        _active?: Element;
+        /**
+         * Kind of Structure.
+         * Example: http://hl7.org/fhir/ValueSet/bodystructure-code
+         */
+        morphology?: CodeableConcept;
+        /**
+         * Body site
+         * Example: http://hl7.org/fhir/ValueSet/body-site
+         */
+        location?: CodeableConcept;
+        /**
+         * Body site modifier
+         * Example: http://hl7.org/fhir/ValueSet/bodystructure-relative-location
+         */
+        locationQualifier?: CodeableConcept[];
+        /**
+         * Text description
+         */
+        description?: string;
+        /**
+         * Contains extended information for property 'description'
+         */
+        _description?: Element;
+        /**
+         * Attached images
+         */
+        image?: Attachment[];
+        /**
+         * Who this is about
+         */
+        patient: Reference;
+    }
+    /**
      * Links related to this Bundle
      */
     interface BundleLink extends BackboneElement {
