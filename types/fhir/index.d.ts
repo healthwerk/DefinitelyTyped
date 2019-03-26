@@ -2211,6 +2211,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _onset?: Element;
         /**
          * mild | moderate | severe (of event as a whole)
+         * Required: http://hl7.org/fhir/ValueSet/reaction-event-severity
          */
         severity?: code;
         /**
@@ -2236,22 +2237,25 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         identifier?: Identifier[];
         /**
          * active | inactive | resolved
+         * Required: http://hl7.org/fhir/ValueSet/allergyintolerance-clinical
          */
-        clinicalStatus?: code;
+        clinicalStatus?: CodeableConcept;
         /**
          * Contains extended information for property 'clinicalStatus'.
          */
         _clinicalStatus?: Element;
         /**
          * unconfirmed | confirmed | refuted | entered-in-error
+         * Required: http://hl7.org/fhir/ValueSet/allergy-verification-status
          */
-        verificationStatus: code;
+        verificationStatus?: CodeableConcept;
         /**
          * Contains extended information for property 'verificationStatus'.
          */
         _verificationStatus?: Element;
         /**
          * allergy | intolerance - Underlying mechanism (if known)
+         * Required: http://hl7.org/fhir/ValueSet/allergy-intolerance-type
          */
         type?: code;
         /**
@@ -2260,6 +2264,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _type?: Element;
         /**
          * food | medication | environment | biologic
+         * Required: http://hl7.org/fhir/ValueSet/allergy-intolerance-category
          */
         category?: code[];
         /**
@@ -2269,19 +2274,24 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * low | high | unable-to-assess
          */
-        criticality?: code;
+        criticality?: CodeableConcept;
         /**
          * Contains extended information for property 'criticality'.
          */
         _criticality?: Element;
         /**
          * Code that identifies the allergy or intolerance
+         * Required: http://hl7.org/fhir/ValueSet/allergy-intolerance-criticality
          */
         code?: CodeableConcept;
         /**
          * Who the sensitivity is for
          */
         patient: Reference;
+        /**
+         * Encounter when the allergy or intolerance was asserted
+         */
+        encounter?: Reference;
         /**
          * When allergy or intolerance was identified
          */
