@@ -2890,7 +2890,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * The actual content
          */
-        content: base64Binary;
+        data?: base64Binary;
         /**
          * Contains extended information for property 'content'.
          */
