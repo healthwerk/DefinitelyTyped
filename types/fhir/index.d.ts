@@ -2569,9 +2569,18 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
      */
     interface AuditEventAgent extends BackboneElement {
         /**
+         * How agent participated
+         * Extensible: http://hl7.org/fhir/ValueSet/participation-role-type
+         */
+        type?: CodeableConcept;
+        /**
          * Agent role in the event
          */
         role?: CodeableConcept[];
+        /**
+         * Identifier of who
+         */
+        who?: Reference;
         /**
          * Direct reference to resource
          */
@@ -2643,6 +2652,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _address?: Element;
         /**
          * The type of network access point
+         * Required: http://hl7.org/fhir/ValueSet/network-type
          */
         type?: code;
         /**
@@ -2659,6 +2669,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         site?: string;
         /**
+         * The identity of source detecting the event.
+         * PractitionerRole | Practitioner | Organization | Device | Patient | RelatedPerson
+         */
+        observer: Reference;
+        /**
          * Contains extended information for property 'site'.
          */
         _site?: Element;
@@ -2668,6 +2683,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         identifier: Identifier;
         /**
          * The type of source where event originated
+         * Extensible: http://hl7.org/fhir/ValueSet/audit-source-type
          */
         type?: Coding[];
     }
@@ -2675,6 +2691,10 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
      * Data or objects used
      */
     interface AuditEventEntity extends BackboneElement {
+        /**
+         * Specific instance of resource (any)
+         */
+        what?: Reference;
         /**
          * Specific instance of object
          */
@@ -2685,18 +2705,22 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         reference?: Reference;
         /**
          * Type of entity involved
+         * Extensible: http://hl7.org/fhir/ValueSet/audit-entity-type
          */
         type?: Coding;
         /**
          * What role the entity played
+         * Extensible: http://hl7.org/fhir/ValueSet/object-role
          */
         role?: Coding;
         /**
          * Life-cycle stage for the entity
+         * Extensible: http://hl7.org/fhir/ValueSet/object-lifecycle-events
          */
         lifecycle?: Coding;
         /**
          * Security labels on the entity
+         * Extensible: http://hl7.org/fhir/ValueSet/security-labels
          */
         securityLabel?: Coding[];
         /**
@@ -2743,7 +2767,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Property value
          */
-        value: base64Binary;
+        valueBase64Binary?: base64Binary;
+        /**
+         * Property value
+         */
+        valueString?: string;
         /**
          * Contains extended information for property 'value'.
          */
@@ -2755,14 +2783,17 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
     interface AuditEvent extends DomainResource {
         /**
          * Type/identifier of event
+         * Extensible: http://hl7.org/fhir/ValueSet/audit-event-type
          */
         type: Coding;
         /**
          * More specific type/id for the event
+         * Extensible: http://hl7.org/fhir/ValueSet/audit-event-sub-type
          */
         subtype?: Coding[];
         /**
          * Type of action performed during the event
+         * Required: http://hl7.org/fhir/ValueSet/audit-event-action
          */
         action?: code;
         /**
@@ -2779,6 +2810,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _recorded?: Element;
         /**
          * Whether the event succeeded or failed
+         * Required: http://hl7.org/fhir/ValueSet/audit-event-outcome
          */
         outcome?: code;
         /**
