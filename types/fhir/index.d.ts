@@ -4301,7 +4301,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Type of involvement
          */
-        role?: CodeableConcept;
+        role?: CodeableConcept[];
         /**
          * Who is involved
          */
@@ -4325,6 +4325,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         identifier?: Identifier[];
         /**
          * proposed | active | suspended | inactive | entered-in-error
+         * Required: http://hl7.org/fhir/ValueSet/care-team-status
          */
         status?: code;
         /**
@@ -4348,9 +4349,9 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         subject?: Reference;
         /**
-         * Encounter or episode associated with CareTeam
+         * Encounter created as part of
          */
-        context?: Reference;
+        encounter?: Reference;
         /**
          * Time period team covers
          */
@@ -4371,6 +4372,10 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Organization responsible for the care team
          */
         managingOrganization?: Reference[];
+        /**
+         * A contact detail for the care team (that applies to all members)
+         */
+        telecom?: ContactPoint[];
         /**
          * Comments made about the CareTeam
          */
