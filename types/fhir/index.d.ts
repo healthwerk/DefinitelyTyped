@@ -4476,11 +4476,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
     /**
      * Who performed charged service
      */
-    interface ChargeItemParticipant extends BackboneElement {
+    interface ChargeItemPerformer extends BackboneElement {
         /**
          * What type of performance was done
          */
-        role?: CodeableConcept;
+        function?: CodeableConcept;
         /**
          * Individual who was performing
          */
@@ -4493,17 +4493,26 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Business Identifier for item
          */
-        identifier?: Identifier;
+        identifier?: Identifier[];
         /**
          * Defining information about the code of this charge item
          */
-        definition?: uri[];
+        definitionUri?: uri[];
         /**
-         * Contains extended information for property 'definition'.
+         * Contains extended information for property 'definitionUri'.
          */
-        _definition?: Element[];
+        _definitionUri?: Element[];
+        /**
+         * Resource defining the code of this ChargeItem
+         */
+        definitionCanonical?: canonical[];
+        /**
+         * Contains extended information for property 'definitionCanonical'
+         */
+        _definitionCanonical?: Element[];
         /**
          * planned | billable | not-billable | aborted | billed | entered-in-error | unknown
+         * Required: http://hl7.org/fhir/ValueSet/chargeitem-status
          */
         status: code;
         /**
@@ -4545,7 +4554,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Who performed charged service
          */
-        participant?: ChargeItemParticipant[];
+        performer?: ChargeItemPerformer[];
         /**
          * Organization providing the charged sevice
          */
@@ -4554,6 +4563,10 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Organization requesting the charged service
          */
         requestingOrganization?: Reference;
+        /**
+         * Organization that has ownership of the (potential, future) revenue
+         */
+        costCenter?: Reference;
         /**
          * Quantity of which the charge item has been serviced
          */
@@ -4602,6 +4615,14 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Which rendered service is being charged?
          */
         service?: Reference[];
+        /**
+         * Product charged
+         */
+        productReference?: Reference;
+        /**
+         * Product charged
+         */
+        productCOdeableConcept?: CodeableConcept;
         /**
          * Account to place this charge
          */
