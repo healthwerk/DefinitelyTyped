@@ -4382,6 +4382,98 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         note?: Annotation[];
     }
     /**
+     * An entry in a catalog
+     */
+    interface CatalogEntry extends DomainResource {
+        /**
+         * Unique identifier of the catalog item
+         */
+        identifier?: Identifier[];
+        /**
+         * The type of item - medication, device, service. protocol or other
+         */
+        type?: CodeableConcept;
+        /**
+         * Whether the entry represents an orderable item
+         */
+        orderable: boolean;
+        /**
+         * Contains extended information for porperty 'orderable'
+         */
+        _orderable?: Element;
+        /**
+         * The item that is being defined
+         */
+        referencedItem: Reference;
+        /**
+         * Any additional identifier(s) for the catalog item, in the same granularity or concept
+         */
+        additionalIdentifier?: Identifier[];
+        /**
+         * Classification (category or class) of the item entry
+         */
+        classification?: CodeableConcept[];
+        /**
+         * draft | active | retired | unknown
+         * Required: http://hl7.org/fhir/ValueSet/publication-status
+         */
+        status?: code;
+        /**
+         * Contains extended information for property 'status'
+         */
+        _status?: Element;
+        /**
+         * The time period in which this catalog entry is expected to be active
+         */
+        validityPeriod?: Period;
+        /**
+         * The date until which this catalog entry is expected to be active
+         */
+        validTo?: dateTime;
+        /**
+         * Contains extended information for property 'validTo'
+         */
+        _validTo?: Element;
+        /**
+         * When was this catalog last updated
+         */
+        lastUpdated?: dateTime;
+        /**
+         * Contains extended information for property 'lastUdpated'
+         */
+        _lastUpdated?: Element;
+        /**
+         * 	Additional characteristics of the catalog entry
+         */
+        additionalCharacteristic?: CodeableConcept[];
+        /**
+         * Additional classification of the catalog entry
+         */
+        additionalClassification?: CodeableConcept[];
+        /**
+         * 	An item that this catalog entry is related to
+         */
+        relatedEntry?: CatalogEntryRelatedEntry[];
+    }
+    /**
+     * 	An item that this catalog entry is related to
+     */
+    interface CatalogEntryRelatedEntry extends BackboneElement {
+        /**
+         * triggers | is-replaced-by
+         * Required: http://hl7.org/fhir/ValueSet/relation-type
+         */
+        relationtype: code;
+        /**
+         * Contains extended information for property 'relationtype'
+         */
+        _relationtype?: Element;
+        /**
+         * The reference to the related item
+         */
+        item: Reference;
+    }
+    /**
      * Who performed charged service
      */
     interface ChargeItemParticipant extends BackboneElement {
