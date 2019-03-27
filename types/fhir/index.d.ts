@@ -3348,6 +3348,14 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         _type?: Element;
         /**
+         * When the bundle was assembled
+         */
+        timestamp?: instant;
+        /**
+         * Contains extended information for property 'timestamp'
+         */
+        _timestamp?: Element;
+        /**
          * If search, the total number of matches
          */
         total?: unsignedInt;
