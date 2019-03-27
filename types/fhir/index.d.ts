@@ -3420,11 +3420,15 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Base URL for the installation
          */
-        url?: uri;
+        url?: url;
         /**
          * Contains extended information for property 'url'.
          */
         _url?: Element;
+        /**
+         * Organization that manages the data
+         */
+        custodian?: Reference;
     }
     /**
      * If the endpoint is a RESTful one
@@ -3432,6 +3436,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
     interface CapabilityStatementRest extends BackboneElement {
         /**
          * client | server
+         * Required: http://hl7.org/fhir/ValueSet/restful-capability-mode
          */
         mode: code;
         /**
@@ -3441,7 +3446,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * General description of implementation
          */
-        documentation?: string;
+        documentation?: markdown;
         /**
          * Contains extended information for property 'documentation'.
          */
@@ -3463,13 +3468,9 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         searchParam?: CapabilityStatementRestResourceSearchParam[];
         /**
-         * Definition of an operation or a custom query
-         */
-        operation?: CapabilityStatementRestOperation[];
-        /**
          * Compartments served/used by system
          */
-        compartment?: uri[];
+        compartment?: canonical[];
         /**
          * Contains extended information for property 'compartment'.
          */
@@ -3489,48 +3490,25 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _cors?: Element;
         /**
          * OAuth | SMART-on-FHIR | NTLM | Basic | Kerberos | Certificates
+         * Extensible: 	http://hl7.org/fhir/ValueSet/restful-security-service
          */
         service?: CodeableConcept[];
         /**
          * General description of how security works
          */
-        description?: string;
+        description?: markdown;
         /**
          * Contains extended information for property 'description'.
          */
         _description?: Element;
-        /**
-         * Certificates associated with security profiles
-         */
-        certificate?: CapabilityStatementRestSecurityCertificate[];
-    }
-    /**
-     * Certificates associated with security profiles
-     */
-    interface CapabilityStatementRestSecurityCertificate extends BackboneElement {
-        /**
-         * Mime type for certificates
-         */
-        type?: code;
-        /**
-         * Contains extended information for property 'type'.
-         */
-        _type?: Element;
-        /**
-         * Actual certificate
-         */
-        blob?: base64Binary;
-        /**
-         * Contains extended information for property 'blob'.
-         */
-        _blob?: Element;
     }
     /**
      * Resource served on the REST interface
      */
     interface CapabilityStatementRestResource extends BackboneElement {
         /**
-         * A resource type that is supported
+         * A resource type that is supported.
+         * Required: http://hl7.org/fhir/ValueSet/resource-types
          */
         type: code;
         /**
@@ -3540,7 +3518,15 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Base System profile for all uses of resource
          */
-        profile?: Reference;
+        profile?: canonical;
+        /**
+         * Contains extended information for property 'profile'
+         */
+        _profile?: Element;
+        /**
+         * Profiles for use cases supported
+         */
+        supportedProfile?: canonical[];
         /**
          * Additional information about the use of the resource type
          */
@@ -3552,9 +3538,10 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * What operations are supported?
          */
-        interaction: CapabilityStatementRestResourceInteraction[];
+        interaction?: CapabilityStatementRestResourceInteraction[];
         /**
          * no-version | versioned | versioned-update
+         * Required: http://hl7.org/fhir/ValueSet/versioning-policy
          */
         versioning?: code;
         /**
@@ -3587,6 +3574,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _conditionalCreate?: Element;
         /**
          * not-supported | modified-since | not-match | full-support
+         * Required: http://hl7.org/fhir/ValueSet/conditional-read-status
          */
         conditionalRead?: code;
         /**
@@ -3603,6 +3591,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _conditionalUpdate?: Element;
         /**
          * not-supported | single | multiple - how conditional delete is supported
+         * Required: http://hl7.org/fhir/ValueSet/conditional-delete-status
          */
         conditionalDelete?: code;
         /**
@@ -3611,6 +3600,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _conditionalDelete?: Element;
         /**
          * literal | logical | resolves | enforced | local
+         * Required: http://hl7.org/fhir/ValueSet/reference-handling-policy
          */
         referencePolicy?: code[];
         /**
@@ -3637,6 +3627,10 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Search parameters supported by implementation
          */
         searchParam?: CapabilityStatementRestResourceSearchParam[];
+        /**
+         * Definition of a resource operation
+         */
+        operation?: CapabilityStatementRestResourceOperation[];
     }
     /**
      * What operations are supported?
@@ -3644,6 +3638,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
     interface CapabilityStatementRestResourceInteraction extends BackboneElement {
         /**
          * read | vread | update | patch | delete | history-instance | history-type | create | search-type
+         * Required: http://hl7.org/fhir/ValueSet/type-restful-interaction
          */
         code: code;
         /**
@@ -3653,9 +3648,38 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Anything special about operation behavior
          */
-        documentation?: string;
+        documentation?: markdown;
         /**
          * Contains extended information for property 'documentation'.
+         */
+        _documentation?: Element;
+    }
+    /**
+     * Definition of a resource operation
+     */
+    interface CapabilityStatementRestResourceOperation extends BackboneElement {
+        /**
+         * Name by which the operation/query is invoked
+         */
+        name: string;
+        /**
+         * Contains extended information for property 'name'
+         */
+        _name: Element;
+        /**
+         * The defined operation/query
+         */
+        definition: canonical;
+        /**
+         * Contains extended information for property 'definition'
+         */
+        _definition?: Element;
+        /**
+         * Specific details about operation behavior
+         */
+        documentation?: markdown;
+        /**
+         * Contains extended information for property 'documentation'
          */
         _documentation?: Element;
     }
@@ -3674,13 +3698,14 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Source of definition for parameter
          */
-        definition?: uri;
+        definition?: canonical;
         /**
          * Contains extended information for property 'definition'.
          */
         _definition?: Element;
         /**
          * number | date | string | token | reference | composite | quantity | uri
+         * Required: http://hl7.org/fhir/ValueSet/search-param-type
          */
         type: code;
         /**
@@ -3690,7 +3715,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Server-specific usage
          */
-        documentation?: string;
+        documentation?: markdown;
         /**
          * Contains extended information for property 'documentation'.
          */
@@ -3702,6 +3727,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
     interface CapabilityStatementRestInteraction extends BackboneElement {
         /**
          * transaction | batch | search-system | history-system
+         * Required: http://hl7.org/fhir/ValueSet/system-restful-interaction
          */
         code: code;
         /**
@@ -3711,28 +3737,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Anything special about operation behavior
          */
-        documentation?: string;
+        documentation?: markdown;
         /**
          * Contains extended information for property 'documentation'.
          */
         _documentation?: Element;
-    }
-    /**
-     * Definition of an operation or a custom query
-     */
-    interface CapabilityStatementRestOperation extends BackboneElement {
-        /**
-         * Name by which the operation/query is invoked
-         */
-        name: string;
-        /**
-         * Contains extended information for property 'name'.
-         */
-        _name?: Element;
-        /**
-         * The defined operation/query
-         */
-        definition: Reference;
     }
     /**
      * If messaging is supported
@@ -3753,7 +3762,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Messaging interface behavior details
          */
-        documentation?: string;
+        documentation?: markdown;
         /**
          * Contains extended information for property 'documentation'.
          */
@@ -3762,10 +3771,6 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Messages supported by this system
          */
         supportedMessage?: CapabilityStatementMessagingSupportedMessage[];
-        /**
-         * Declare support for this event
-         */
-        event?: CapabilityStatementMessagingEvent[];
     }
     /**
      * Where messages should be sent
@@ -3773,12 +3778,13 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
     interface CapabilityStatementMessagingEndpoint extends BackboneElement {
         /**
          * http | ftp | mllp +
+         * Extensible: http://hl7.org/fhir/ValueSet/message-transport
          */
         protocol: Coding;
         /**
          * Network address or identifier of the end-point
          */
-        address: uri;
+        address: url;
         /**
          * Contains extended information for property 'address'.
          */
@@ -3790,6 +3796,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
     interface CapabilityStatementMessagingSupportedMessage extends BackboneElement {
         /**
          * sender | receiver
+         * Required: http://hl7.org/fhir/ValueSet/event-capability-mode
          */
         mode: code;
         /**
@@ -3799,56 +3806,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Message supported by this system
          */
-        definition: Reference;
-    }
-    /**
-     * Declare support for this event
-     */
-    interface CapabilityStatementMessagingEvent extends BackboneElement {
+        definition: canonical;
         /**
-         * Event type
+         * Contains extended information for porperty 'definition'
          */
-        code: Coding;
-        /**
-         * Consequence | Currency | Notification
-         */
-        category?: code;
-        /**
-         * Contains extended information for property 'category'.
-         */
-        _category?: Element;
-        /**
-         * sender | receiver
-         */
-        mode: code;
-        /**
-         * Contains extended information for property 'mode'.
-         */
-        _mode?: Element;
-        /**
-         * Resource that's focus of message
-         */
-        focus: code;
-        /**
-         * Contains extended information for property 'focus'.
-         */
-        _focus?: Element;
-        /**
-         * Profile that describes the request
-         */
-        request: Reference;
-        /**
-         * Profile that describes the response
-         */
-        response: Reference;
-        /**
-         * Endpoint-specific event documentation
-         */
-        documentation?: string;
-        /**
-         * Contains extended information for property 'documentation'.
-         */
-        _documentation?: Element;
+        _definition?: Element;
     }
     /**
      * Document definition
@@ -3865,7 +3827,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Description of document support
          */
-        documentation?: string;
+        documentation?: markdown;
         /**
          * Contains extended information for property 'documentation'.
          */
@@ -3873,7 +3835,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Constraint on a resource used in the document
          */
-        profile: Reference;
+        profile: canonical;
+        /**
+         * Contains extended information for property 'profile'
+         */
+        _profile?: Element;
     }
     /**
      * A statement of system capabilities
@@ -3913,6 +3879,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _title?: Element;
         /**
          * draft | active | retired | unknown
+         * Required: http://hl7.org/fhir/ValueSet/publication-status
          */
         status: code;
         /**
@@ -3981,6 +3948,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _copyright?: Element;
         /**
          * instance | capability | requirements
+         * Required: http://hl7.org/fhir/ValueSet/capability-statement-kind
          */
         kind: code;
         /**
@@ -3990,11 +3958,19 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Canonical URL of another capability statement this implements
          */
-        instantiates?: uri[];
+        instantiates?: canonical[];
         /**
          * Contains extended information for property 'instantiates'.
          */
         _instantiates?: Element[];
+        /**
+         * Canonical URL of another capability statement this adds to
+         */
+        imports?: canonical[];
+        /**
+         * Contains extended information for porperty 'imports'
+         */
+        _imports?: Element;
         /**
          * Software that is covered by this capability statement
          */
@@ -4004,23 +3980,17 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         implementation?: CapabilityStatementImplementation;
         /**
-         * FHIR Version the system uses
+         * FHIR Version the system uses.
+         * Required: http://hl7.org/fhir/ValueSet/FHIR-version
          */
-        fhirVersion: id;
+        fhirVersion: code;
         /**
          * Contains extended information for property 'fhirVersion'.
          */
         _fhirVersion?: Element;
         /**
-         * no | extensions | elements | both
-         */
-        acceptUnknown: code;
-        /**
-         * Contains extended information for property 'acceptUnknown'.
-         */
-        _acceptUnknown?: Element;
-        /**
          * formats supported (xml | json | ttl | mime type)
+         * Required: http://hl7.org/fhir/ValueSet/mimetypes
          */
         format: code[];
         /**
@@ -4028,7 +3998,8 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         _format?: Element[];
         /**
-         * Patch formats supported
+         * Patch formats supported. 
+         * Required: http://hl7.org/fhir/ValueSet/mimetypes
          */
         patchFormat?: code[];
         /**
@@ -4038,15 +4009,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Implementation guides supported
          */
-        implementationGuide?: uri[];
+        implementationGuide?: canonical[];
         /**
          * Contains extended information for property 'implementationGuide'.
          */
         _implementationGuide?: Element[];
-        /**
-         * Profiles for use cases supported
-         */
-        profile?: Reference[];
         /**
          * If the endpoint is a RESTful one
          */
