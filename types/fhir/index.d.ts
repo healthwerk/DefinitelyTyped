@@ -4058,12 +4058,25 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
     interface CarePlanActivityDetail extends BackboneElement {
         /**
          * diet | drug | encounter | observation | procedure | supply | other
+         * Required: http://hl7.org/fhir/ValueSet/care-plan-activity-kind
          */
-        category?: CodeableConcept;
+        kind?: code;
         /**
-         * Protocol or definition
+         * Instantiates FHIR protocol or definition
          */
-        definition?: Reference;
+        instantiatesCanonical?: canonical[];
+        /**
+         * Contains extended information for property 'instantiatesCanonical'
+         */
+        _instantiatesCanonical?: Element;
+        /**
+         * Instantiates external protocol or definition
+         */
+        instantiatesUri?: uri[];
+        /**
+         * Contains extended information for property 'instantiatesUri'
+         */
+        _instantiatesUri?: Element;
         /**
          * Detail type of activity
          */
@@ -4082,6 +4095,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         goal?: Reference[];
         /**
          * not-started | scheduled | in-progress | on-hold | completed | cancelled | unknown
+         * Required: http://hl7.org/fhir/ValueSet/care-plan-activity-status
          */
         status: code;
         /**
@@ -4091,7 +4105,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Reason for current status
          */
-        statusReason?: string;
+        statusReason?: CodeableConcept;
         /**
          * Contains extended information for property 'statusReason'.
          */
@@ -4099,7 +4113,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Do NOT do
          */
-        prohibited?: boolean;
+        doNotPerform?: boolean;
         /**
          * Contains extended information for property 'prohibited'.
          */
@@ -4162,9 +4176,21 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         identifier?: Identifier[];
         /**
-         * Protocol or definition
+         * Instantiates FHIR protocol or definition
          */
-        definition?: Reference[];
+        instantiatesCanonical?: canonical[];
+        /**
+         * Contains extended information for property 'instantiatesCanonical'
+         */
+        _instantiatesCanonical?: Element;
+        /**
+         * Instantiates external protocol or definition
+         */
+        instantiatesUri?: uri;
+        /**
+         * Containes extended information for property 'instantiatesUri'
+         */
+        _instantiatesUri?: Element;
         /**
          * Fulfills care plan
          */
@@ -4179,6 +4205,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         partOf?: Reference[];
         /**
          * draft | active | suspended | completed | entered-in-error | cancelled | unknown
+         * Required: http://hl7.org/fhir/ValueSet/care-plan-status
          */
         status: code;
         /**
@@ -4187,6 +4214,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _status?: Element;
         /**
          * proposal | plan | order | option
+         * Required: http://hl7.org/fhir/ValueSet/care-plan-intent
          */
         intent: code;
         /**
@@ -4218,17 +4246,29 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         subject: Reference;
         /**
-         * Created in context of
+         * Encounter created as part of
          */
-        context?: Reference;
+        encounter?: Reference;
         /**
          * Time period plan covers
          */
         period?: Period;
         /**
-         * Who is responsible for contents of the plan
+         * Date record was first recorded
          */
-        author?: Reference[];
+        created?: dateTime;
+        /**
+         * Contains extended information for property 'created'
+         */
+        _created?: Element;
+        /**
+         * Who is the designated responsible party
+         */
+        author?: Reference;
+        /**
+         * Who provided the content of the care plan
+         */
+        contributor?: Reference[];
         /**
          * Who's involved in plan?
          */
