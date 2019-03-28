@@ -5519,11 +5519,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Service instance
          */
-        sequenceLinkId: positiveInt;
+        itemSequence: positiveInt;
         /**
-         * Contains extended information for property 'sequenceLinkId'.
+         * Contains extended information for property 'itemSequence'.
          */
-        _sequenceLinkId?: Element;
+        _itemSequence?: Element;
         /**
          * List of note numbers which apply
          */
@@ -5535,7 +5535,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Adjudication details
          */
-        adjudication?: ClaimResponseItemAdjudication[];
+        adjudication: ClaimResponseItemAdjudication[];
         /**
          * Detail line items
          */
@@ -5573,11 +5573,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Service instance
          */
-        sequenceLinkId: positiveInt;
+        detailSequence: positiveInt;
         /**
-         * Contains extended information for property 'sequenceLinkId'.
+         * Contains extended information for property 'detailSequence'.
          */
-        _sequenceLinkId?: Element;
+        _detailSequence?: Element;
         /**
          * List of note numbers which apply
          */
@@ -5589,7 +5589,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Detail level adjudication details
          */
-        adjudication?: ClaimResponseItemAdjudication[];
+        adjudication: ClaimResponseItemAdjudication[];
         /**
          * Subdetail line items
          */
@@ -5602,11 +5602,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Service instance
          */
-        sequenceLinkId: positiveInt;
+        subDetailSequence: positiveInt;
         /**
-         * Contains extended information for property 'sequenceLinkId'.
+         * Contains extended information for property 'subDetailSequence'.
          */
-        _sequenceLinkId?: Element;
+        _subDetailSequence?: Element;
         /**
          * List of note numbers which apply
          */
@@ -5625,33 +5625,101 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
      */
     interface ClaimResponseAddItem extends BackboneElement {
         /**
-         * Service instances
+         * 	Item sequence number
          */
-        sequenceLinkId?: positiveInt[];
+        itemSequence?: positiveInt[];
         /**
-         * Contains extended information for property 'sequenceLinkId'.
+         * Contains extended information for property 'itemSequence'.
          */
-        _sequenceLinkId?: Element[];
+        _itemSequence?: Element[];
         /**
-         * Revenue or cost center code
+         * Detail sequence number
          */
-        revenue?: CodeableConcept;
+        detailSequence?: positiveInt[];
         /**
-         * Type of service or product
+         * Contains extended information for property 'detailSequence'.
          */
-        category?: CodeableConcept;
+        _detailSequence?: Element[];
+        /**
+         * Subdetail sequence number
+         */
+        subdetailSequence?: positiveInt[];
+        /**
+         * Contains extended information for property 'subdetailSequence'.
+         */
+        _subdetailSequence?: Element[];
+        /**
+         * Authorized providers
+         */
+        provider?: Reference[];
         /**
          * Group, Service or Product
          */
-        service?: CodeableConcept;
+        productOrService: CodeableConcept;
         /**
          * Service/Product billing modifiers
          */
         modifier?: CodeableConcept[];
         /**
-         * Professional fee or Product charge
+         * Program the product or service is provided under
          */
-        fee?: Money;
+        programCode?: CodeableConcept[];
+        /**
+         * Date or dates of service or product delivery
+         */
+        servicedDate?: date;
+        /**
+         * Contains extended information for property 'servicedDate'
+         */
+        _servicedDate?: Element;
+        /**
+         * Date or dates of service or product delivery
+         */
+        servicedPeriod?: Period;
+        /**
+         * Place of service where product is supplied
+         */
+        locationCodeableConcept?: CodeableConcept;
+        /**
+         * Place of service where product is supplied
+         */
+        locationAddress?: Address;
+        /**
+         * Place of service where product is supplied
+         */
+        locationReference?: Reference;
+        /** 
+         * Count of products or services
+        */
+        quantity?: SimpleQuantity;
+        /**
+         * Contains extended information for property 'quantity'
+         */
+        _quantity?: Element;
+        /**
+         * Fee, charge or cost per item
+         */
+        unitPrice?: Money;
+        /**
+         * Price scaling factor
+         */
+        factor?: decimal;
+        /**
+         * Contains extended information for property 'factor'
+         */
+        _factor?: Element;
+        /**
+         * Total item cost
+         */
+        net?: Money;
+        /**
+         * Anatomical location
+         */
+        bodySite?: CodeableConcept;
+        /**
+         * Anatomical sublocation
+         */
+        subSite?: CodeableConcept[];
         /**
          * List of note numbers which apply
          */
@@ -5663,7 +5731,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Added items adjudication
          */
-        adjudication?: ClaimResponseItemAdjudication[];
+        adjudication: ClaimResponseItemAdjudication[];
         /**
          * Added items details
          */
@@ -5674,25 +5742,37 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
      */
     interface ClaimResponseAddItemDetail extends BackboneElement {
         /**
-         * Revenue or cost center code
-         */
-        revenue?: CodeableConcept;
-        /**
-         * Type of service or product
-         */
-        category?: CodeableConcept;
-        /**
          * Service or Product
          */
-        service?: CodeableConcept;
+        productOrService: CodeableConcept;
         /**
          * Service/Product billing modifiers
          */
         modifier?: CodeableConcept[];
         /**
-         * Professional fee or Product charge
+         * Count of products or services
          */
-        fee?: Money;
+        quantity?: SimpleQuantity;
+        /**
+         * Contains extended information for property 'quantity'
+         */
+        _quantity?: Element;
+        /**
+         * Fee, charge or cost per item
+         */
+        unitPrice?: Money;
+        /**
+         * Price scaling factor
+         */
+        factor?: decimal;
+        /**
+         * Contains extended information for property 'factor'
+         */
+        _factor?: Element;
+        /**
+         * Total item cost
+         */
+        net?: Money;
         /**
          * List of note numbers which apply
          */
@@ -5704,7 +5784,60 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Added items detail adjudication
          */
-        adjudication?: ClaimResponseItemAdjudication[];
+        adjudication: ClaimResponseItemAdjudication[];
+        /**
+         * Insurer added line items
+         */
+        subDetail?: ClaimResponseAddItemDetailSubDetail[];
+    }
+    /**
+     * Insurer added line items
+     */
+    interface ClaimResponseAddItemDetailSubDetail extends BackboneElement {
+        /**
+         * Billing, service, product, pr drug code
+         */
+        productOrService: CodeableConcept;
+        /**
+         * Service/Product billing modifiers
+         */
+        modifier?: CodeableConcept[];
+        /**
+         * Count of products or services
+         */
+        quantity?: SimpleQuantity;
+        /**
+         * Contains extended information for property 'quantity'
+         */
+        _quantity?: Element;
+        /**
+         * Fee, charge or cost per item
+         */
+        unitPrice?: Money;
+        /**
+         * Price scaling factor
+         */
+        factor?: decimal;
+        /**
+         * Contains extended information for property 'factor'
+         */
+        _factor?: Element;
+        /**
+         * Total item cost
+         */
+        net?: Money;
+        /**
+         * Applicable note numbers
+         */
+        noteNumber? : positiveInt[];
+        /**
+         * Contains extended information for property 'noteNumber'
+         */
+        _noteNumber?: Element[];
+        /**
+         * Added items detail
+         */
+        adjudication: ClaimResponseItemAdjudication[];
     }
     /**
      * Processing errors
@@ -5713,27 +5846,27 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Item sequence number
          */
-        sequenceLinkId?: positiveInt;
+        itemSequence?: positiveInt;
         /**
-         * Contains extended information for property 'sequenceLinkId'.
+         * Contains extended information for property 'itemSequence'.
          */
-        _sequenceLinkId?: Element;
+        _itemSequence?: Element;
         /**
          * Detail sequence number
          */
-        detailSequenceLinkId?: positiveInt;
+        detailSequence?: positiveInt;
         /**
-         * Contains extended information for property 'detailSequenceLinkId'.
+         * Contains extended information for property 'detailSequence'.
          */
-        _detailSequenceLinkId?: Element;
+        _detailSequence?: Element;
         /**
          * Subdetail sequence number
          */
-        subdetailSequenceLinkId?: positiveInt;
+        subDetailSequence?: positiveInt;
         /**
-         * Contains extended information for property 'subdetailSequenceLinkId'.
+         * Contains extended information for property 'subDetailSequence'.
          */
-        _subdetailSequenceLinkId?: Element;
+        _subDetailSequence?: Element;
         /**
          * Error code detailing processing issues
          */
@@ -5746,7 +5879,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Partial or Complete
          */
-        type?: CodeableConcept;
+        type: CodeableConcept;
         /**
          * Payment adjustment for non-Claim issues
          */
@@ -5766,7 +5899,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Payable amount after adjustment
          */
-        amount?: Money;
+        amount: Money;
         /**
          * Identifier of the payment instrument
          */
@@ -5787,11 +5920,15 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * display | print | printoper
          */
-        type?: CodeableConcept;
+        type?: code;
+        /**
+         * Contains extended information for property 'type'
+         */
+        _type?: Element;
         /**
          * Note explanatory text
          */
-        text?: string;
+        text: string;
         /**
          * Contains extended information for property 'text'.
          */
@@ -5834,17 +5971,22 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         _businessArrangement?: Element;
         /**
-         * Pre-Authorization/Determination Reference
-         */
-        preAuthRef?: string[];
-        /**
-         * Contains extended information for property 'preAuthRef'.
-         */
-        _preAuthRef?: Element[];
-        /**
          * Adjudication results
          */
         claimResponse?: Reference;
+    }
+    /**
+     * Adjudication totals
+     */
+    interface ClaimResponseTotal extends BackboneElement {
+        /**
+         * Type of adjudication information
+         */
+        category: CodeableConcept;
+        /**
+         * Financial total for the category
+         */
+        amount: Money;
     }
     /**
      * Remittance resource
@@ -5856,20 +5998,39 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         identifier?: Identifier[];
         /**
          * active | cancelled | draft | entered-in-error
+         * Required: http://hl7.org/fhir/ValueSet/fm-status
          */
-        status?: code;
+        status: code;
         /**
          * Contains extended information for property 'status'.
          */
         _status?: Element;
         /**
+         * Granular claim type
+         * Extensible: http://hl7.org/fhir/ValueSet/claim-type
+         */
+        type: CodeableConcept;
+        /**
+         * More grnaular claim type
+         */
+        subType?: CodeableConcept;
+        /**
+         * claim | preauthorization | predetermination
+         * Required: http://hl7.org/fhir/ValueSet/claim-use
+         */
+        use: code;
+        /**
+         * Contains extended information for property 'use'
+         */
+        _use?: Element;
+        /**
          * The subject of the Products and Services
          */
-        patient?: Reference;
+        patient: Reference;
         /**
          * Creation date
          */
-        created?: dateTime;
+        created: dateTime;
         /**
          * Contains extended information for property 'created'.
          */
@@ -5877,15 +6038,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Insurance issuing organization
          */
-        insurer?: Reference;
+        insurer: Reference;
         /**
          * Responsible practitioner
          */
-        requestProvider?: Reference;
-        /**
-         * Responsible organization
-         */
-        requestOrganization?: Reference;
+        requestor?: Reference;
         /**
          * Id of resource triggering adjudication
          */
@@ -5893,7 +6050,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * complete | error | partial
          */
-        outcome?: CodeableConcept;
+        outcome: CodeableConcept;
         /**
          * Disposition Message
          */
@@ -5902,6 +6059,18 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Contains extended information for property 'disposition'.
          */
         _disposition?: Element;
+        /**
+         * Pre-Authorization/Determination Reference
+         */
+        preAuthRef?: string[];
+        /**
+         * Contains extended information for property 'preAuthRef'.
+         */
+        _preAuthRef?: Element[];
+        /**
+         * Preauthorization reference effective period
+         */
+        preAuthPeriod?: Period;
         /**
          * Party to be paid any benefits payable
          */
@@ -5915,21 +6084,17 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         addItem?: ClaimResponseAddItem[];
         /**
+         * Header level adjudication
+         */
+        adjudication?: ClaimResponseItemAdjudication[];
+        /**
+         * Adjudication totals
+         */
+        total?: ClaimResponseTotal[];
+        /**
          * Processing errors
          */
         error?: ClaimResponseError[];
-        /**
-         * Total Cost of service from the Claim
-         */
-        totalCost?: Money;
-        /**
-         * Unallocated deductible
-         */
-        unallocDeductable?: Money;
-        /**
-         * Total benefit payable for the Claim
-         */
-        totalBenefit?: Money;
         /**
          * Payment details, if paid
          */
@@ -5937,11 +6102,15 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Funds reserved status
          */
-        reserved?: Coding;
+        fundsReserve?: CodeableConcept;
+        /**
+         * Printed form identifier
+         */
+        formCode?: CodeableConcept;
         /**
          * Printed Form Identifier
          */
-        form?: CodeableConcept;
+        form?: Attachment;
         /**
          * Processing notes
          */
