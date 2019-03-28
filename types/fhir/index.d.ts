@@ -4637,6 +4637,232 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         supportingInformation?: Reference[];
     }
     /**
+     * Whether or not the billing code is applicable
+     */
+    interface ChargeItemDefinitionApplicability extends BackboneElement{ 
+        /**
+         * Natural language description of the condition
+         */
+        description?: string;
+        /**
+         * Contains extended information for property 'description'
+         */
+        _description?: Element;
+        /**
+         * Language of the expression
+         */
+        language?: string;
+        /**
+         * Contains extended information for property 'language'
+         */
+        _language?: Element;
+        /**
+         * Boolean-valued expression
+         */
+        expression?: string;
+        /**
+         * Contains extended information for property 'expression'
+         */
+        _expression?: Element;
+    }
+    /**
+     * Definition of properties and rules about how the price and the applicability of a ChargeItem can be determined
+     */
+    interface ChargeItemDefinition extends DomainResource {
+        /**
+         * Canonical identifier for this charge item definition, represented as a URI (globally unique)
+         */
+        url: uri;
+        /**
+         * Contains extended information for property 'url'
+         */
+        _url?: Element;
+        /**
+         * Additional identifier for the charge item definition
+         */
+        identifier?: Identifier[];
+        /**
+         * 	Business version of the charge item definition
+         */
+        version?: string;
+        /**
+         * Contains extended information for property 'version'
+         */
+        _version?: Element;
+        /**
+         * 	Name for this charge item definition (human friendly)
+         */
+        title?: string;
+        /**
+         * Contains extended information for property 'title'
+         */
+        _title?: Element;
+        /**
+         * Underlying externally-defined charge item definition
+         */
+        derivedFromUri?: uri[];
+        /**
+         * Contains extended information for property 'derivedFromUri'
+         */
+        _derivedFromUri?: Element;
+        /**
+         * A larger definition of which this particular definition is a component or step
+         */
+        partOf?: canonical[];
+        /**
+         * Contains extended information for property 'partOf'
+         */
+        _partOf?: Element[];
+        /**
+         * Completed or terminated request(s) whose function is taken by this new request
+         */
+        replaces?: canonical[];
+        /**
+         * Contains extended information for property 'replaces'
+         */
+        _replaces?: Element[];
+        /**
+         * draft | active | retired | unknown 
+         * Required: http://hl7.org/fhir/ValueSet/publication-status
+         */
+        status: code;
+        /**
+         * Contains extended information for property 'status'
+         */
+        _status?: Element;
+        /**
+         * For testing purposes, not real usage
+         */
+        experimental?: boolean;
+        /**
+         * Contains extended information for property 'experimental'
+         */
+        _experimental?: Element;
+        /**
+         * Date last changed
+         */
+        date?: dateTime;
+        /**
+         * Contains extended information for property 'date'
+         */
+        _date?: Element;
+        /**
+         * Name of the publisher (organization or individual)
+         */
+        publisher?: string;
+        /**
+         * Contains extended information for property 'publisher'
+         */
+        _publisher?: Element;
+        /**
+         * Contact details for the publisher
+         */
+        contact?: ContactDetail[];
+        /**
+         * Natural language description of the charge item definition
+         */
+        description?: markdown;
+        /**
+         * Contains extended information for property 'description'
+         */
+        _description?: Element;
+        /**
+         * The context that the content is intended to support
+         */
+        useContext?: UsageContext[];
+        /**
+         * Intended jurisdiction for charge item definition (if applicable)
+         */
+        jurisdiction?: CodeableConcept[];
+        /**
+         * Use and/or publishing restrictions
+         */
+        copyright?: markdown;
+        /**
+         * Contains extended information for property 'copyright'
+         */
+        _copyright?: Element;
+        /**
+         * When the charge item definition was approved by publisher
+         */
+        approvalDate?: date;
+        /**
+         * Contains extended information for porperty 'approvalDate'
+         */
+        _approvalDate?: Element;
+        /**
+         * When the charge item definition was last reviewed
+         */
+        lastReviewDate?: date;
+        /**
+         * Contains extended information for property 'lastReviewDate'
+         */
+        _lastReviewDate?: Element;
+        /**
+         * When the charge item definition is expected to be used
+         */
+        effectivePeriod?: Period;
+        /**
+         * Billing codes or products types this definition applies to
+         * Example: 
+         */
+        code?: CodeableConcept;
+        /**
+         * Instances this defintion applies to
+         */
+        instance?: Reference[];
+        /**
+         * Whether or not the billing code is applicable
+         */
+        applicability?: ChargeItemDefinitionApplicability[];
+        /**
+         * Group of properties which are applicable under the same conditions
+         */
+        propertyGroup?: ChargeItemDefinitionPropertyGroup[];
+    }
+    /**
+     * Group of properties which are applicable under the same conditions
+     */
+    interface ChargeItemDefinitionPropertyGroup extends BackboneElement {
+        /**
+         * Conditions under which the priceComponent is applicable
+         */
+        applicability?: ChargeItemDefinitionApplicability[];
+        /**
+         * Components of total line item price
+         */
+        priceComponent?: ChargeItemDefinitionPropertyGroupPriceComponent[];
+    }
+    /**
+     * Components of total line item price
+     */
+    interface ChargeItemDefinitionPropertyGroupPriceComponent extends BackboneElement {
+        /**
+         * 	base | surcharge | deduction | discount | tax | informational
+         */
+        type: code;
+        /**
+         * Contains extended information for property 'type'
+         */
+        _type?: Element;
+        /**
+         * Code identifying the specific component
+         */
+        code?: CodeableConcept;
+        /**
+         * Factor used for calculating this component
+         */
+        factor?: decimal;
+        /**
+         * Contains extended information for property 'factor'
+         */
+        _factor?: Element;
+        /**
+         * Monetary amount associated with this component
+         */
+        amount?: Money;
+    }
+    /**
      * Related Claims which may be revelant to processing this claimn
      */
     interface ClaimRelated extends BackboneElement {
