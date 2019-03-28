@@ -4888,10 +4888,6 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         type: CodeableConcept;
         /**
-         * organization | patient | practitioner | relatedperson
-         */
-        resourceType?: Coding;
-        /**
          * Party to receive the payable
          */
         party?: Reference;
@@ -4932,7 +4928,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
     /**
      * Exceptions, special considerations, the condition, situation, prior or concurrent issues
      */
-    interface ClaimInformation extends BackboneElement {
+    interface ClaimSupportingInformation extends BackboneElement {
         /**
          * Information instance identifier
          */
@@ -4961,6 +4957,14 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * When it occurred
          */
         timingPeriod?: Period;
+        /**
+         * Data to be provided
+         */
+        valueBoolean?: boolean;
+        /**
+         * Contains extended information for property 'valueBoolean'
+         */
+        _valueBoolean?: Element;
         /**
          * Additional Data or supporting information
          */
@@ -5011,6 +5015,10 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         type?: CodeableConcept[];
         /**
+         * Present on admission
+         */
+        onAdmission?: CodeableConcept;
+        /**
          * Package billing code
          */
         packageCode?: CodeableConcept;
@@ -5028,6 +5036,10 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         _sequence?: Element;
         /**
+         * Category of Procedure
+         */
+        type?: CodeableConcept[];
+        /**
          * When the procedure was performed
          */
         date?: dateTime;
@@ -5043,6 +5055,10 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Patient's list of procedures performed
          */
         procedureReference?: Reference;
+        /**
+         * Unique device identifier
+         */
+        udi?: Reference[];
     }
     /**
      * Insurance or medical plan
@@ -5064,6 +5080,10 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Contains extended information for property 'focal'.
          */
         _focal?: Element;
+        /**
+         * Pre-assigned Claim number
+         */
+        identifier?: Identifier;
         /**
          * Insurance information
          */
@@ -5131,35 +5151,35 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Applicable careTeam members
          */
-        careTeamLinkId?: positiveInt[];
+        careTeamSequence?: positiveInt[];
         /**
-         * Contains extended information for property 'careTeamLinkId'.
+         * Contains extended information for property 'careTeamLSequence'.
          */
-        _careTeamLinkId?: Element[];
+        _careTeamSequence?: Element[];
         /**
          * Applicable diagnoses
          */
-        diagnosisLinkId?: positiveInt[];
+        diagnosisSequence?: positiveInt[];
         /**
-         * Contains extended information for property 'diagnosisLinkId'.
+         * Contains extended information for property 'diagnosisSequence'.
          */
-        _diagnosisLinkId?: Element[];
+        _diagnosisSequence?: Element[];
         /**
          * Applicable procedures
          */
-        procedureLinkId?: positiveInt[];
+        procedureSequence?: positiveInt[];
         /**
-         * Contains extended information for property 'procedureLinkId'.
+         * Contains extended information for property 'procedureSequence'.
          */
-        _procedureLinkId?: Element[];
+        _procedureSequence?: Element[];
         /**
          * Applicable exception and supporting information
          */
-        informationLinkId?: positiveInt[];
+        informationSequence?: positiveInt[];
         /**
-         * Contains extended information for property 'informationLinkId'.
+         * Contains extended information for property 'informationSequence'.
          */
-        _informationLinkId?: Element[];
+        _informationSequence?: Element[];
         /**
          * Revenue or cost center code
          */
@@ -5171,7 +5191,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Billing Code
          */
-        service?: CodeableConcept;
+        productOrService?: CodeableConcept;
         /**
          * Service/Product billing modifiers
          */
@@ -5268,7 +5288,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Billing Code
          */
-        service?: CodeableConcept;
+        productOrService: CodeableConcept;
         /**
          * Service/Product billing modifiers
          */
@@ -5329,7 +5349,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Billing Code
          */
-        service?: CodeableConcept;
+        productOrService: CodeableConcept;
         /**
          * Service/Product billing modifiers
          */
@@ -5373,24 +5393,28 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         identifier?: Identifier[];
         /**
          * active | cancelled | draft | entered-in-error
+         * Required: http://hl7.org/fhir/ValueSet/fm-status
          */
-        status?: code;
+        status: code;
         /**
          * Contains extended information for property 'status'.
+         * Extensible: http://hl7.org/fhir/ValueSet/claim-type
          */
         _status?: Element;
         /**
          * Type or discipline
          */
-        type?: CodeableConcept;
+        type: CodeableConcept;
         /**
          * Finer grained claim type information
+         * Example: http://hl7.org/fhir/ValueSet/claim-subtype
          */
         subType?: CodeableConcept[];
         /**
          * complete | proposed | exploratory | other
+         * Required: http://hl7.org/fhir/ValueSet/claim-use
          */
-        use?: code;
+        use: code;
         /**
          * Contains extended information for property 'use'.
          */
@@ -5406,7 +5430,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Creation date
          */
-        created?: dateTime;
+        created: dateTime;
         /**
          * Contains extended information for property 'created'.
          */
@@ -5422,15 +5446,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Responsible provider
          */
-        provider?: Reference;
-        /**
-         * Responsible organization
-         */
-        organization?: Reference;
+        provider: Reference;
         /**
          * Desired processing priority
          */
-        priority?: CodeableConcept;
+        priority: CodeableConcept;
         /**
          * Funds requested to be reserved
          */
@@ -5466,7 +5486,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Exceptions, special considerations, the condition, situation, prior or concurrent issues
          */
-        information?: ClaimInformation[];
+        supportingInfo?: ClaimSupportingInformation[];
         /**
          * List of Diagnosis
          */
@@ -5478,19 +5498,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Insurance or medical plan
          */
-        insurance?: ClaimInsurance[];
+        insurance: ClaimInsurance[];
         /**
          * Details about an accident
          */
         accident?: ClaimAccident;
-        /**
-         * Period unable to work
-         */
-        employmentImpacted?: Period;
-        /**
-         * Period in hospital
-         */
-        hospitalization?: Period;
         /**
          * Goods and Services
          */
