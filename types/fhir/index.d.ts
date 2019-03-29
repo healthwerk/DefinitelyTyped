@@ -6831,19 +6831,6 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         contentReference?: Reference;
     }
     /**
-     * Who/what is requesting service
-     */
-    interface CommunicationRequestRequester extends BackboneElement {
-        /**
-         * Individual making the request
-         */
-        agent: Reference;
-        /**
-         * Organization agent is acting for
-         */
-        onBehalfOf?: Reference;
-    }
-    /**
      * A request for information to be sent to a receiver
      */
     interface CommunicationRequest extends DomainResource {
@@ -6868,6 +6855,10 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         status: code;
         /**
+         * Reason for current status
+         */
+        statusReason?: CodeableConcept;
+        /**
          * Contains extended information for property 'status'.
          */
         _status?: Element;
@@ -6879,6 +6870,14 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Message urgency
          */
         priority?: code;
+        /**
+         * True if request is prohibiting action
+         */
+        doNotPerform?: boolean;
+        /**
+         * Contains extended information for property 'doNotPerform'
+         */
+        _doNotPerform?: Element;
         /**
          * Contains extended information for property 'priority'.
          */
@@ -6892,17 +6891,17 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         subject?: Reference;
         /**
+         * Resources that pertain to this communication request
+         */
+        about?: Reference[];
+        /**
+         * Encounter created as part of
+         */
+        encounter?: Reference;
+        /**
          * Message recipient
          */
         recipient?: Reference[];
-        /**
-         * Focal resources
-         */
-        topic?: Reference[];
-        /**
-         * Encounter or episode leading to message
-         */
-        context?: Reference;
         /**
          * Message payload
          */
@@ -6934,7 +6933,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Who/what is requesting service
          */
-        requester?: CommunicationRequestRequester;
+        requester?: Reference;
         /**
          * Why is communication needed?
          */
