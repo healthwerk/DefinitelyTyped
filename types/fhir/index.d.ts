@@ -7416,11 +7416,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Value of the referenced element
          */
-        code: string;
+        value: string;
         /**
-         * Contains extended information for property 'code'.
+         * Contains extended information for property 'value'.
          */
-        _code?: Element;
+        _value?: Element;
         /**
          * Display for the code
          */
@@ -7461,7 +7461,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Canonical URL for other concept map
          */
-        url?: uri;
+        url?: canonical;
         /**
          * Contains extended information for property 'url'.
          */
@@ -7588,6 +7588,14 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         sourceReference?: Reference;
         /**
+         * Identifies the source of the concepts which are being mapped
+         */
+        sourceCanonical?: canonical;
+        /**
+         * Contains extended information for property 'sourceCanonical'
+         */
+        _sourceCanonical?: Element;
+        /**
          * Provides context to the mappings
          */
         targetUri?: uri;
@@ -7599,6 +7607,14 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Provides context to the mappings
          */
         targetReference?: Reference;
+        /**
+         * Provides context to the mappings
+         */
+        targetCanonical?: canonical;
+        /**
+         * Contains extended information for property 'targetCanonical'
+         */
+        _targetCanonical?: Element;
         /**
          * Same source and target systems
          */
