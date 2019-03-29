@@ -6695,9 +6695,25 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         identifier?: Identifier[];
         /**
-         * Instantiates protocol or definition
+         * Instantiates FHIR protocol or definition
          */
-        definition?: Reference[];
+        instantiatesCanoncial?: canonical[];
+        /**
+         * Contains extended information for property 'instantiatesCanoncial'
+         */
+        _instantiatesCanoncial?: Element;
+        /**
+         * Instantiates external protocol or definition
+         */
+        instantiatesUri?: uri[];
+        /**
+         * Contains extended information for property 'instantiatesUri'
+         */
+        _instantiatesUri?: Element;
+        /**
+         * Reply to
+         */
+        inResponseTo?: Reference[];
         /**
          * Request fulfilled by this communication
          */
@@ -6708,24 +6724,26 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         partOf?: Reference[];
         /**
          * preparation | in-progress | suspended | aborted | completed | entered-in-error
+         * Required: http://hl7.org/fhir/ValueSet/event-status
          */
         status: code;
+        /**
+         * Reason for current status
+         */
+        statusReason?: CodeableConcept;
+        /**
+         * Message urgency.
+         * Required: http://hl7.org/fhir/ValueSet/request-priority
+         */
+        priority?: code;
+        /**
+         * Contains extended information for property 'priority'
+         */
+        _priority?: Element;
         /**
          * Contains extended information for property 'status'.
          */
         _status?: Element;
-        /**
-         * Communication did not occur
-         */
-        notDone?: boolean;
-        /**
-         * Contains extended information for property 'notDone'.
-         */
-        _notDone?: Element;
-        /**
-         * Why communication did not occur
-         */
-        notDoneReason?: CodeableConcept;
         /**
          * Message category
          */
@@ -6739,17 +6757,21 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         subject?: Reference;
         /**
+         * Resources that pertain to this communication
+         */
+        about?: Reference[];
+        /**
+         * Encounter created as part of
+         */
+        encounter?: Reference;
+        /**
          * Message recipient
          */
         recipient?: Reference[];
         /**
          * Focal resources
          */
-        topic?: Reference[];
-        /**
-         * Encounter or episode leading to message
-         */
-        context?: Reference;
+        topic?: Reference;
         /**
          * When sent
          */
