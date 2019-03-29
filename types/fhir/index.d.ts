@@ -6168,8 +6168,13 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         identifier?: Identifier[];
         /**
          * draft | completed | entered-in-error
+         * Required: http://hl7.org/fhir/ValueSet/clinicalimpression-status
          */
         status: code;
+        /**
+         * Reason for current status
+         */
+        statusReason?: CodeableConcept;
         /**
          * Contains extended information for property 'status'.
          */
@@ -6191,9 +6196,9 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         subject: Reference;
         /**
-         * Encounter or Episode created from
+         * Encounter created as part of
          */
-        context?: Reference;
+        encounter?: Reference;
         /**
          * Time of assessment
          */
@@ -6259,9 +6264,9 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         prognosisReference?: Reference[];
         /**
-         * Action taken as part of assessment procedure
+         * Information supporting the clinical impression
          */
-        action?: Reference[];
+        supportingInfo?: Reference[];
         /**
          * Comments made about the ClinicalImpression
          */
