@@ -6989,6 +6989,14 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         _url?: Element;
         /**
+         * Business version of the compartment definition
+         */
+        version?: string;
+        /**
+         * Contains extended information for property 'version'
+         */
+        _version?: Element;
+        /**
          * Name for this compartment definition (computer friendly)
          */
         name: string;
@@ -6996,14 +7004,6 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Contains extended information for property 'name'.
          */
         _name?: Element;
-        /**
-         * Name for this compartment definition (human friendly)
-         */
-        title?: string;
-        /**
-         * Contains extended information for property 'title'.
-         */
-        _title?: Element;
         /**
          * draft | active | retired | unknown
          */
@@ -7060,10 +7060,6 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Context the content is intended to support
          */
         useContext?: UsageContext[];
-        /**
-         * Intended jurisdiction for compartment definition (if applicable)
-         */
-        jurisdiction?: CodeableConcept[];
         /**
          * Patient | Encounter | RelatedPerson | Practitioner | Device
          */
