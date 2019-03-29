@@ -7088,11 +7088,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * personal | professional | legal | official
          */
-        mode: code[];
+        mode: code;
         /**
          * Contains extended information for property 'mode'.
          */
-        _mode?: Element[];
+        _mode?: Element;
         /**
          * When the composition was attested
          */
@@ -7161,6 +7161,14 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         code?: CodeableConcept;
         /**
+         * Who and/or what authored the section
+         */
+        author?: Reference[];
+        /**
+         * Who/what the section is about, when it is not about the subject of compositioin
+         */
+        focus?: Reference;
+        /**
          * Text summary of the section, for human interpretation
          */
         text?: Narrative;
@@ -7212,11 +7220,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Categorization of Composition
          */
-        class?: CodeableConcept;
+        category?: CodeableConcept[];
         /**
          * Who and/or what the composition is about
          */
-        subject: Reference;
+        subject?: Reference;
         /**
          * Context of the Composition
          */
