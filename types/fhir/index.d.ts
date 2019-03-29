@@ -7632,6 +7632,10 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Formal record of assessment
          */
         assessment?: Reference[];
+        /**
+         * Kind of staging
+         */
+        type?: CodeableConcept;
     }
     /**
      * Supporting evidence
@@ -7656,22 +7660,25 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         identifier?: Identifier[];
         /**
          * active | recurrence | inactive | remission | resolved
+         * Required: http://hl7.org/fhir/ValueSet/condition-clinical
          */
-        clinicalStatus?: code;
+        clinicalStatus?: CodeableConcept;
         /**
          * Contains extended information for property 'clinicalStatus'.
          */
         _clinicalStatus?: Element;
         /**
          * provisional | differential | confirmed | refuted | entered-in-error | unknown
+         * Required: http://hl7.org/fhir/ValueSet/condition-ver-status
          */
-        verificationStatus?: code;
+        verificationStatus?: CodeableConcept;
         /**
          * Contains extended information for property 'verificationStatus'.
          */
         _verificationStatus?: Element;
         /**
          * problem-list-item | encounter-diagnosis
+         * Extensible: http://hl7.org/fhir/ValueSet/condition-category
          */
         category?: CodeableConcept[];
         /**
@@ -7691,9 +7698,9 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         subject: Reference;
         /**
-         * Encounter or episode when condition first asserted
+         * Encounter  when condition first asserted
          */
-        context?: Reference;
+        encounter?: Reference;
         /**
          * Estimated or actual date,  date-time, or age
          */
@@ -7737,14 +7744,6 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * If/when in resolution/remission
          */
-        abatementBoolean?: boolean;
-        /**
-         * Contains extended information for property 'abatementBoolean'.
-         */
-        _abatementBoolean?: Element;
-        /**
-         * If/when in resolution/remission
-         */
         abatementPeriod?: Period;
         /**
          * If/when in resolution/remission
@@ -7761,11 +7760,15 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Date record was believed accurate
          */
-        assertedDate?: dateTime;
+        recordedDate?: dateTime;
         /**
-         * Contains extended information for property 'assertedDate'.
+         * Contains extended information for property 'recordedDate'.
          */
-        _assertedDate?: Element;
+        _recordedDate?: Element;
+        /**
+         * Who recorded the condition
+         */
+        recorder?: Reference;
         /**
          * Person who asserts this condition
          */
@@ -7773,7 +7776,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Stage/grade, usually assessed formally
          */
-        stage?: ConditionStage;
+        stage?: ConditionStage[];
         /**
          * Supporting evidence
          */
