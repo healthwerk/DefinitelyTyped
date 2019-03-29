@@ -6468,6 +6468,14 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Contains extended information for property 'valueDateTime'.
          */
         _valueDateTime?: Element;
+        /**
+         * Value of the property for this concept
+         */
+        valueDecimal?: decimal;
+        /**
+         * Contains extended information for property 'valueDecimal'
+         */
+        _valueDecimal?: Element;
     }
     /**
      * A set of codes drawn from one or more code systems
@@ -6484,7 +6492,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Additional identifier for the code system
          */
-        identifier?: Identifier;
+        identifier?: Identifier[];
         /**
          * Business version of the code system (Coding.version)
          */
@@ -6511,6 +6519,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _title?: Element;
         /**
          * draft | active | retired | unknown
+         * Required: http://hl7.org/fhir/ValueSet/publication-status
          */
         status: code;
         /**
@@ -6588,13 +6597,14 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Canonical URL for value set with entire code system
          */
-        valueSet?: uri;
+        valueSet?: canonical;
         /**
          * Contains extended information for property 'valueSet'.
          */
         _valueSet?: Element;
         /**
          * grouped-by | is-a | part-of | classified-with
+         * Required: http://hl7.org/fhir/ValueSet/codesystem-hierarchy-meaning
          */
         hierarchyMeaning?: code;
         /**
@@ -6619,12 +6629,21 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _versionNeeded?: Element;
         /**
          * not-present | example | fragment | complete
+         * Required: http://hl7.org/fhir/ValueSet/codesystem-content-mode
          */
         content: code;
         /**
          * Contains extended information for property 'content'.
          */
         _content?: Element;
+        /**
+         * Canonical URL of Code system this addds designations and properties to
+         */
+        supplement?: canonical;
+        /**
+         * Contains extended information for property 'supplement'
+         */
+        _supplement?: Element;
         /**
          * Total concepts in the code system
          */
