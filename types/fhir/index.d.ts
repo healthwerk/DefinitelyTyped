@@ -7787,19 +7787,6 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         note?: Annotation[];
     }
     /**
-     * Who|what controlled by this consent (or group, by role)
-     */
-    interface ConsentActor extends BackboneElement {
-        /**
-         * How the actor is involved
-         */
-        role: CodeableConcept;
-        /**
-         * Resource for the actor (or group, by role)
-         */
-        reference: Reference;
-    }
-    /**
      * Policies covered by this consent
      */
     interface ConsentPolicy extends BackboneElement {
@@ -7821,75 +7808,34 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _uri?: Element;
     }
     /**
-     * Data controlled by this consent
+     * Consent verified by patient or family
      */
-    interface ConsentData extends BackboneElement {
+    interface ConsentVerification extends BackboneElement {
         /**
-         * instance | related | dependents | authoredby
+         * Has been verified
          */
-        meaning: code;
+        verified?: boolean;
         /**
-         * Contains extended information for property 'meaning'.
+         * Contains extended information for property 'verified'
          */
-        _meaning?: Element;
+        _verified?: Element;
         /**
-         * The actual data reference
+         * Person who verified
          */
-        reference: Reference;
+        verifiedWith?: Reference;
+        /**
+         * When consent verified
+         */
+        verificationDate?: dateTime;
+        /**
+         * Contains extended information for property 'verificationDate'
+         */
+        _verificationDate?: Element;
     }
     /**
-     * Additional rule -  addition or removal of permissions
+     * Who/What controlled by this rule (or group, by role)
      */
-    interface ConsentExcept extends BackboneElement {
-        /**
-         * deny | permit
-         */
-        type: code;
-        /**
-         * Contains extended information for property 'type'.
-         */
-        _type?: Element;
-        /**
-         * Timeframe for this exception
-         */
-        period?: Period;
-        /**
-         * Who|what controlled by this exception (or group, by role)
-         */
-        actor?: ConsentExceptActor[];
-        /**
-         * Actions controlled by this exception
-         */
-        action?: CodeableConcept[];
-        /**
-         * Security Labels that define affected resources
-         */
-        securityLabel?: Coding[];
-        /**
-         * Context of activities covered by this exception
-         */
-        purpose?: Coding[];
-        /**
-         * e.g. Resource Type, Profile, or CDA etc
-         */
-        class?: Coding[];
-        /**
-         * e.g. LOINC or SNOMED CT code, etc in the content
-         */
-        code?: Coding[];
-        /**
-         * Timeframe for data controlled by this exception
-         */
-        dataPeriod?: Period;
-        /**
-         * Data controlled by this exception
-         */
-        data?: ConsentExceptData[];
-    }
-    /**
-     * Who|what controlled by this exception (or group, by role)
-     */
-    interface ConsentExceptActor extends BackboneElement {
+    interface ConsentProvisionActor extends BackboneElement {
         /**
          * How the actor is involved
          */
@@ -7900,15 +7846,15 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         reference: Reference;
     }
     /**
-     * Data controlled by this exception
+     * Data controlled by this rule
      */
-    interface ConsentExceptData extends BackboneElement {
+    interface ConsentProvisionData extends BackboneElement {
         /**
          * instance | related | dependents | authoredby
          */
         meaning: code;
         /**
-         * Contains extended information for property 'meaning'.
+         * Contains extended information for property 'meaning'
          */
         _meaning?: Element;
         /**
@@ -7917,21 +7863,79 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         reference: Reference;
     }
     /**
+     * Contraints to the base Consent.policyRule
+     */
+    interface ConsentProvision extends BackboneElement {
+        /**
+         * deny | permit
+         */
+        type?: code;
+        /**
+         * Contains extended information for property 'type'
+         */
+        _type?: Element;
+        /**
+         * Timeframe for this rule
+         */
+        period?: Period;
+        /**
+         * Who/What controlled by this rule (or group, by role)
+         */
+        actor?: ConsentProvisionActor[];
+        /**
+         * Actions controlled by this rule
+         */
+        action?: CodeableConcept[];
+        /**
+         * Security labels that define affected resources
+         */
+        securityLabel?: Coding[];
+        /**
+         * Context of activities covered by this role
+         */
+        purpose?: Coding[];
+        /**
+         * e.g. Resource type, Profile, CDA, etc.
+         */
+        class?: Coding[];
+        /**
+         * e.g. LOINC or SNOMED CT code etc. in the content
+         */
+        code?: CodeableConcept[];
+        /**
+         * Timeframe for data controlled by this rule
+         */
+        dataPeriod?: Period;
+        /**
+         * Data controlled by this rule
+         */
+        data?: ConsentProvisionData[];
+        /**
+         * Nested exception rules
+         */
+        provision?: ConsentProvision[];
+    }
+    /**
      * A healthcare consumer's policy choices to permits or denies recipients or roles to perform actions for specific purposes and periods of time
      */
     interface Consent extends DomainResource {
         /**
          * Identifier for this record (external references)
          */
-        identifier?: Identifier;
+        identifier?: Identifier[];
         /**
          * draft | proposed | active | rejected | inactive | entered-in-error
+         * Required: http://hl7.org/fhir/ValueSet/consent-state-codes
          */
         status: code;
         /**
          * Contains extended information for property 'status'.
          */
         _status?: Element;
+        /**
+         * Which of the four areas this resource covers
+         */
+        scope: CodeableConcept;
         /**
          * Classification of the consent statement - for indexing/retrieval
          */
@@ -7941,29 +7945,17 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         patient: Reference;
         /**
-         * Period that this consent applies
-         */
-        period?: Period;
-        /**
          * When this Consent was created or indexed
          */
         dateTime?: dateTime;
         /**
+         * Who is agreeing to the policy and rules
+         */
+        performer?: Reference[];
+        /**
          * Contains extended information for property 'dateTime'.
          */
         _dateTime?: Element;
-        /**
-         * Who is agreeing to the policy and exceptions
-         */
-        consentingParty?: Reference[];
-        /**
-         * Who|what controlled by this consent (or group, by role)
-         */
-        actor?: ConsentActor[];
-        /**
-         * Actions controlled by this consent
-         */
-        action?: CodeableConcept[];
         /**
          * Custodian of the consent
          */
@@ -7975,10 +7967,6 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Source from which this consent is taken
          */
-        sourceIdentifier?: Identifier;
-        /**
-         * Source from which this consent is taken
-         */
         sourceReference?: Reference;
         /**
          * Policies covered by this consent
@@ -7987,31 +7975,15 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Policy that this consents to
          */
-        policyRule?: uri;
+        policyRule?: CodeableConcept;
         /**
-         * Contains extended information for property 'policyRule'.
+         * Consent Verified by patient or family
          */
-        _policyRule?: Element;
+        verification?: ConsentVerification[];
         /**
-         * Security Labels that define affected resources
+         * Constraints to the base Consent.policyRule
          */
-        securityLabel?: Coding[];
-        /**
-         * Context of activities for which the agreement is made
-         */
-        purpose?: Coding[];
-        /**
-         * Timeframe for data controlled by this consent
-         */
-        dataPeriod?: Period;
-        /**
-         * Data controlled by this consent
-         */
-        data?: ConsentData[];
-        /**
-         * Additional rule -  addition or removal of permissions
-         */
-        except?: ConsentExcept[];
+        provision?: ConsentProvision;
     }
     /**
      * Entity being ascribed responsibility
