@@ -7986,19 +7986,6 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         provision?: ConsentProvision;
     }
     /**
-     * Entity being ascribed responsibility
-     */
-    interface ContractAgent extends BackboneElement {
-        /**
-         * Contract Agent Type
-         */
-        actor: Reference;
-        /**
-         * Role type of the agent
-         */
-        role?: CodeableConcept[];
-    }
-    /**
      * Contract Signatory
      */
     interface ContractSigner extends BackboneElement {
@@ -8016,57 +8003,525 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         signature: Signature[];
     }
     /**
-     * Contract Valued Item List
+     * Protection for the Term
      */
-    interface ContractValuedItem extends BackboneElement {
+    interface ContractTermSecurityLabel extends BackboneElement {
         /**
-         * Contract Valued Item Type
+         * Link to Security Labels
+         */
+        number?: unsignedInt[];
+        /**
+         * Confidentiality Protection
+         */
+        classification: Coding;
+        /**
+         * Applicable Policy
+         */
+        category?: Coding[];
+        /**
+         * Handling Instructions
+         */
+        control?: Coding[];
+    }
+    /**
+     * Offer recipient
+     */
+    interface ContractTermOfferParty extends BackboneElement {
+        /**
+         * Referenced entity
+         */
+        reference: Reference[];
+        /**
+         * Participant engangement type
+         */
+        role: CodeableConcept[];
+    }
+    /**
+     * Repsonse to offer text
+     */
+    interface ContractTermOfferAnswer extends BackboneElement {
+        /**
+         * The actual answer response
+         */
+        valueBoolean?: boolean;
+        /**
+         * Contains extended information for property 'valueBoolean'
+         */
+        _valueBoolean?: Element;
+        /**
+         * The actual answer response
+         */
+        valueDecimal?: decimal;
+        /**
+         * Contains extended information for property 'valueDecimal'
+         */
+        _valueDecimal?: Element;
+        /**
+         * The actual answer response
+         */
+        valueInteger?: integer;
+        /**
+         * Contains extended information for property 'valueInteger'
+         */
+        _valueInteger?: Element;
+        /**
+         * The actual answer response
+         */
+        valueDate?: date;
+        /**
+         * Contains extended information for property 'valueDate'
+         */
+        _valueDate?: Element;
+        /**
+         * The actual answer response
+         */
+        valueDateTime?: dateTime;
+        /**
+         * Contains extended information for property 'valueDateTime'
+         */
+        _valueDateTime?: Element;
+        /**
+         * The actual answer response
+         */
+        valueTime?: time;
+        /**
+         * Contains extended information for property 'valueTime'
+         */
+        _valueTime?: Element;
+        /**
+         * The actual answer response
+         */
+        valueString?: string;
+        /**
+         * Contains extended information for property 'valueString'
+         */
+        _valueString?: Element;
+        /**
+         * The actual answer response
+         */
+        valueUri?: uri;
+        /**
+         * Contains extended information for property 'valueUri'
+         */
+        _valueUri?: Element;
+        /**
+         * The actual answer response
+         */
+        valueAttachment?: Attachment;
+        /**
+         * The actual answer response
+         */
+        valueCoding?: Coding;
+        /**
+         * The actual answer response
+         */
+        valueQuantity?: Quantity;
+        /**
+         * The actual answer response
+         */
+        valueReference?: Reference;
+    }
+    /**
+     * Context of the Contract term
+     */
+    interface ContractTermOffer extends BackboneElement {
+        /**
+         * Offer business ID
+         */
+        identifier?: Identifier[];
+        /**
+         * Offer Recipient
+         */
+        party?: ContractTermOfferParty[];
+        /**
+         * Negotiable offer asset
+         */
+        topic?: Reference;
+        /**
+         * Contract Offer Type or Form
+         */
+        type?: CodeableConcept;
+        /**
+         * Accepting party choice
+         */
+        decision?: CodeableConcept;
+        /**
+         * How decision is conveyed
+         */
+        decisionMode?: CodeableConcept[];
+        /**
+         * Response to offer text
+         */
+        answer?: ContractTermOfferAnswer[];
+        /**
+         * Human readable offer text
+         */
+        text?: string;
+        /**
+         * Contains extended information for property 'text'
+         */
+        _text?: Element;
+        /**
+         * Pointer to text
+         */
+        linkId?: string[];
+        /**
+         * Contains extended information for property 'linkId'
+         */
+        _linkId?: Element[];
+        /**
+         * Offer restriction numbers
+         */
+        securityLabelNumber?: unsignedInt[];
+        /**
+         * Contains extended information for property 'securityLabelNumber'
+         */
+        _securityLabelNumber?: Element[];
+    }
+    /**
+     * Circumstance of the asset
+     */
+    interface ContractTermAssetContext extends BackboneElement {
+        /**
+         * Creator, custodian or owner
+         */
+        reference?: Reference;
+        /**
+         * Codeable asset context
+         */
+        code?: CodeableConcept[];
+        /**
+         * Context description
+         */
+        text?: string
+        /**
+         * Contains extended information for property 'text'
+         */
+        _text?: Element;
+    }
+    /**
+     * Contract valued item List
+     */
+    interface ContractTermAssetValuedItem extends BackboneElement {
+        /**
+         * Contract Valued Item type
          */
         entityCodeableConcept?: CodeableConcept;
         /**
-         * Contract Valued Item Type
+         * Contract valued item type
          */
         entityReference?: Reference;
         /**
-         * Contract Valued Item Number
+         * Contract valued Item number
          */
         identifier?: Identifier;
         /**
-         * Contract Valued Item Effective Tiem
+         * Contract Valued Item Effective Time
          */
         effectiveTime?: dateTime;
         /**
-         * Contains extended information for property 'effectiveTime'.
+         * Contains extended information for porperty 'effectiveTime'
          */
         _effectiveTime?: Element;
         /**
          * Count of Contract Valued Items
          */
-        quantity?: Quantity;
+        quantity?: SimpleQuantity;
         /**
-         * Contract Valued Item fee, charge, or cost
+         * Contains extended information for property 'quantity'
+         */
+        _quantity?: Element;
+        /**
+         * Contract Valued item fee, charge, or cost
          */
         unitPrice?: Money;
         /**
-         * Contract Valued Item Price Scaling Factor
+         * Contract valued item Price scaling factor
          */
         factor?: decimal;
         /**
-         * Contains extended information for property 'factor'.
+         * Contains extended information for property 'factor'
          */
         _factor?: Element;
         /**
-         * Contract Valued Item Difficulty Scaling Factor
+         * Contract valued item difficulty scaling factor
          */
         points?: decimal;
         /**
-         * Contains extended information for property 'points'.
+         * Contains extended information for property 'points'
          */
         _points?: Element;
         /**
-         * Total Contract Valued Item Value
+         * Total contract valued item value
          */
         net?: Money;
+        /**
+         * Terms of valuation
+         */
+        payment?: string;
+        /**
+         * Contains extended information for property 'payment'
+         */
+        _payment?: Element;
+        /**
+         * When payment is due
+         */
+        paymentDate?: dateTime;
+        /**
+         * Contains extended information for property 'paymentDate'
+         */
+        _paymentDate?: Element;
+        /**
+         * Who will make payment
+         */
+        responsible?: Reference;
+        /**
+         * Who will receive payment
+         */
+        recipient?: Reference;
+        /**
+         * Pointer to specific item
+         */
+        linkId?: string[];
+        /**
+         * Contains extended information for property 'linkId'
+         */
+        _linkId?: Element[];
+        /**
+         * Security Labels that define affected terms
+         */
+        securityLabelNumber?: unsignedInt[];
+        /**
+         * Contains extended information for property 'securityLabelNumber'
+         */
+        _securityLabelNumber?: Element[];
+    }
+    /**
+     * Contract Term Asset List
+     */
+    interface ContractTermAsset extends BackboneElement {
+        /**
+         * Range of asset
+         */
+        scope?: CodeableConcept;
+        /**
+         * Asset category
+         */
+        type?: CodeableConcept[];
+        /**
+         * Associated entities
+         */
+        typeReference?: Reference[];
+        /**
+         * Asset sub-category
+         */
+        subtype?: CodeableConcept[];
+        /**
+         * Kinship of the asset
+         */
+        relationship?: Coding;
+        /**
+         * Circumstance of the asset
+         */
+        context?: ContractTermAssetContext[];
+        /**
+         * Quality description of asset
+         */
+        condition?: string;
+        /**
+         * Contains extended information for porperty 'condition'
+         */
+        _condition?: Element;
+        /**
+         * Asset availability types
+         */
+        periodType?: CodeableConcept[];
+        /**
+         * Time period of the asset
+         */
+        period?: Period[];
+        /**
+         * Time period
+         */
+        usePeriod?: Period[];
+        /**
+         * Asset clause or question text
+         */
+        text?: string;
+        /**
+         * Contains extended information for property 'text'
+         */
+        _text?: Element;
+        /**
+         * Pointer to asset text
+         */
+        linkId?: string[];
+        /**
+         * Contains extended information for property 'linkId'
+         */
+        _linkId?: Element[];
+        /**
+         * Response to assets
+         */
+        answer?: ContractTermOfferAnswer[];
+        /**
+         * Asset restriction numbers
+         */
+        securityLabelNumber?: unsignedInt[];
+        /**
+         * Contract Valued Item List
+         */
+        valuedItem?: ContractTermAssetValuedItem[];
+    }
+    /**
+     * Entity of the action
+     */
+    interface ContractTermActionSubject extends BackboneElement {
+        /**
+         * Entity of the action
+         */
+        reference: Reference[];
+        /**
+         * Role type of the agent
+         */
+        role?: CodeableConcept;
+    }
+    /**
+     * Entity being ascribed responsibility
+     */
+    interface ContractTermAction extends BackboneElement {
+        /**
+         * True if the term prohibits the action
+         */
+        doNotPerform?: boolean;
+        /**
+         * Contains extended information for property 'doNotPerform'
+         */
+        _doNotPerform?: Element;
+        /**
+         * Type or form of the action
+         */
+        type: CodeableConcept;
+        /**
+         * Entity of the action
+         */
+        subject?: ContractTermActionSubject[];
+        /**
+         * Purpose for the Contract Term action
+         */
+        intent: CodeableConcept;
+        /**
+         * Pointer to specific item
+         */
+        linkId?: string[];
+        /**
+         * Contains extended information for property 'linkId'
+         */
+        _linkId?: Element[];
+        /**
+         * State of the action
+         */
+        status: CodeableConcept;
+        /**
+         * Episoce associated with action
+         */
+        context?: Reference;
+        /**
+         * Pointer to specific item
+         */
+        contextLinkId?: string[];
+        /**
+         * Contains extended information for propery 'contextLinkId'
+         */
+        _contextLinkId?: Element[];
+        /**
+         * When action happens
+         */
+        occurenceDateTime?: dateTime;
+        /**
+         * Contains extended information for property 'occurenceDateTime'
+         */
+        _occurenceDateTime?: Element;
+        /**
+         * When action happens
+         */
+        occurencePeriod?: Period;
+        /**
+         * When action happens
+         */
+        occurenceTiming?: Timing;
+        /**
+         * Who asked for action
+         */
+        requester?: Reference[];
+        /**
+         * Pointer to specific item
+         */
+        requesterLinkId?: string[];
+        /**
+         * Contains extended information for property 'requesterLinkId'
+         */
+        _requesterLinkId?: Element;
+        /**
+         * Kind of service performer
+         */
+        performerType?: CodeableConcept[];
+        /**
+         * Competency of the performer
+         */
+        performerRole?: CodeableConcept;
+        /**
+         * Actor that will execute (or not) the action
+         */
+        performer?: Reference;
+        /**
+         * Pointer to specific item
+         */
+        performerLinkId?: string[];
+        /**
+         * Contains extended information for property 'performerLinkId'
+         */
+        _performerLinkId?: Element[];
+        /**
+         * Why is action (not) needed?
+         */
+        reasonCode?: CodeableConcept[];
+        /**
+         * Why is action (not) needed?
+         */
+        reasonReference?: Reference[];
+        /**
+         * Why action is to be performed
+         */
+        reason?: string[];
+        /**
+         * Contains extended information for property 'reason
+         */
+        _reason?: Element[];
+        /**
+         * Pointer to specific term
+         */
+        reasonLinkId?: string[];
+        /**
+         * Contains extended information for property 'reasonLinkId'
+         */
+        _reasonLinkId?: Element[];
+        /**
+         * Comments about the action
+         */
+        note?: Annotation[];
+        /**
+         * Action restriction numbers
+         */
+        securityLabelNumber?: unsignedInt[];
+        /**
+         * Contains extended information for property 'securityLabelNumber'
+         */
+        _securityLabelNumber?: Element[];
+        /**
+         * Nested Contract Term Group
+         */
+        group?: ContractTerm[];
     }
     /**
      * Contract Term List
@@ -8089,6 +8544,14 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         applies?: Period;
         /**
+         * Context of the Contract term
+         */
+        topicReference?: Reference;
+        /**
+         * Context of the Contract term
+         */
+        topicCodeableConcept?: CodeableConcept;
+        /**
          * Contract Term Type or Form
          */
         type?: CodeableConcept;
@@ -8097,25 +8560,21 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         subType?: CodeableConcept;
         /**
+         * Protection for the term
+         */
+        securityLabel?: ContractTermSecurityLabel[];
+        /**
          * Context of the Contract term
          */
-        topic?: Reference[];
+        offer: ContractTermOffer;
         /**
          * Contract Term Activity
          */
-        action?: CodeableConcept[];
+        action?: ContractTermAction[];
         /**
-         * Purpose for the Contract Term Action
+         * Contract Term Asset List
          */
-        actionReason?: CodeableConcept[];
-        /**
-         * Security Labels that define affected terms
-         */
-        securityLabel?: Coding[];
-        /**
-         * Contract Term Agent List
-         */
-        agent?: ContractTermAgent[];
+        asset?: ContractTermAsset[];
         /**
          * Human readable Contract term text
          */
@@ -8125,26 +8584,9 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         _text?: Element;
         /**
-         * Contract Term Valued Item List
-         */
-        valuedItem?: ContractTermValuedItem[];
-        /**
          * Nested Contract Term Group
          */
         group?: ContractTerm[];
-    }
-    /**
-     * Contract Term Agent List
-     */
-    interface ContractTermAgent extends BackboneElement {
-        /**
-         * Contract Term Agent Subject
-         */
-        actor: Reference;
-        /**
-         * Type of the Contract Term Agent
-         */
-        role?: CodeableConcept[];
     }
     /**
      * Contract Term Valued Item List
@@ -8239,13 +8681,66 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         contentReference?: Reference;
     }
     /**
+     * Contract precursor content
+     */
+    interface ContractContentDefinition extends BackboneElement {
+        /**
+         * Content structure and use
+         */
+        type: CodeableConcept
+        /**
+         * Detailed Content Type Definition
+         */
+        subType?: CodeableConcept;
+        /**
+         * Publisher Entity
+         */
+        publisher?: Reference;
+        /**
+         * When published
+         */
+        publicationDate?: dateTime;
+        /**
+         * Contains extended information for property 'publicationDate'
+         */
+        _publicationDate?: Element;
+        /**
+         * draft | active | retired | unknown
+         */
+        publicationStatus: code;
+        /**
+         * Contains extended information for property 'publicationStatus'
+         */
+        _publicationStatus?: Element;
+        /**
+         * Publication ownership
+         */
+        copyright?: markdown;
+    }
+    /**
      * Legal Agreement
      */
     interface Contract extends DomainResource {
         /**
          * Contract number
          */
-        identifier?: Identifier;
+        identifier?: Identifier[];
+        /**
+         * Canonical identifier for this contract
+         */
+        url?: uri;
+        /**
+         * Contains extended information for property 'url'
+         */
+        _url?: Element;
+        /**
+         * An edition identifier used for business purposes to label business relevant purposes.
+         */
+        version?: string;
+        /**
+         * Contains extended information for property 'version'
+         */
+        _version?: Element;
         /**
          * amended | appended | cancelled | disputed | entered-in-error | executable | executed | negotiable | offered | policy | rejected | renewed | revoked | resolved | terminated
          */
@@ -8254,6 +8749,26 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Contains extended information for property 'status'.
          */
         _status?: Element;
+        /**
+         * Nagotiation status
+         */
+        legalState?: CodeableConcept;
+        /**
+         * Source Contract definition
+         */
+        instantiatesCanonical?: Reference;
+        /**
+         * External Contract Definition
+         */
+        instantiatesUri?: uri;
+        /**
+         * Contains extended information for property 'instantiatesUri'
+         */
+        _instantiatesUri?: Element;
+        /**
+         * Content derived from the basal information
+         */
+        contentDerivative?: CodeableConcept;
         /**
          * When this Contract was issued
          */
@@ -8267,13 +8782,13 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         applies?: Period;
         /**
+         * Contract cessation cause
+         */
+        expirationType?: CodeableConcept;
+        /**
          * Contract Target Entity
          */
         subject?: Reference[];
-        /**
-         * Context of the Contract
-         */
-        topic?: Reference[];
         /**
          * Authority under which this Contract has standing
          */
@@ -8283,6 +8798,58 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         domain?: Reference[];
         /**
+         * Specific location
+         */
+        site?: Reference;
+        /**
+         * Computer friendly designation
+         */
+        name?: string;
+        /**
+         * Contains extended information for property 'name'
+         */
+        _name?: Element;
+        /**
+         * Human friendly designation
+         */
+        title?: string;
+        /**
+         * Contains extended information for property 'title'
+         */
+        _title?: Element;
+        /**
+         * Subordinate fiendly name
+         */
+        subtitle?: string;
+        /**
+         * Contains extended information for property 'subtitle'
+         */
+        _subtitle?: Element;
+        /**
+         * Acronym or short name
+         */
+        alias?: string[];
+        /**
+         * Contains extended information for property 'alias'
+         */
+        _alias?: Element[];
+        /**
+         * Source of Contract
+         */
+        author?: Reference;
+        /**
+         * Range of legal concerns
+         */
+        scope?: CodeableConcept;
+        /**
+         * Focus of contract interest
+         */
+        topicCodeableConcept?: CodeableConcept;
+        /**
+         * Focus of contract interest
+         */
+        topicReference?: Reference;
+        /**
          * Type or form
          */
         type?: CodeableConcept;
@@ -8291,49 +8858,26 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         subType?: CodeableConcept[];
         /**
-         * Action stipulated by this Contract
+         * Contract precursor content
          */
-        action?: CodeableConcept[];
-        /**
-         * Rationale for the stiplulated action
-         */
-        actionReason?: CodeableConcept[];
-        /**
-         * Decision by Grantor
-         */
-        decisionType?: CodeableConcept;
-        /**
-         * Content derived from the basal information
-         */
-        contentDerivative?: CodeableConcept;
-        /**
-         * Security Labels that define affected resources
-         */
-        securityLabel?: Coding[];
-        /**
-         * Entity being ascribed responsibility
-         */
-        agent?: ContractAgent[];
-        /**
-         * Contract Signatory
-         */
-        signer?: ContractSigner[];
-        /**
-         * Contract Valued Item List
-         */
-        valuedItem?: ContractValuedItem[];
+        contentDefinition?: ContractContentDefinition;
         /**
          * Contract Term List
          */
         term?: ContractTerm[];
         /**
-         * Binding Contract
+         * Extra information
          */
-        bindingAttachment?: Attachment;
+        supportingInfo?: Reference[];
         /**
-         * Binding Contract
+         * Key event in contract history
          */
-        bindingReference?: Reference;
+        relevantHistory?: Reference[];
+        /**
+         * Contract Signatory
+         */
+        signer?: ContractSigner[];
+        
         /**
          * Contract Friendly Language
          */
@@ -8346,6 +8890,14 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Computable Contract Language
          */
         rule?: ContractRule[];
+        /**
+         * Binding contract
+         */
+        legallyBindingAttachment?: Attachment;
+        /**
+         * Binding contract
+         */
+        legallyBindingReference?: Reference;
     }
     /**
      * Additional coverage classifications
