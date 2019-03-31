@@ -8902,103 +8902,65 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
     /**
      * Additional coverage classifications
      */
-    interface CoverageGrouping extends BackboneElement {
+    interface CoverageClass extends BackboneElement {
         /**
-         * An identifier for the group
+         * Type of class such as 'group' or 'plan'
          */
-        group?: string;
+        type: CodeableConcept;
         /**
-         * Contains extended information for property 'group'.
+         * Value associated with the type
          */
-        _group?: Element;
+        value: string;
         /**
-         * Display text for an identifier for the group
+         * Contains extended information for property 'value'
          */
-        groupDisplay?: string;
+        _value?: Element;
         /**
-         * Contains extended information for property 'groupDisplay'.
+         * Human readable description of the type and value
          */
-        _groupDisplay?: Element;
+        name?: string;
         /**
-         * An identifier for the subsection of the group
+         * Contains extended information for property 'name'
          */
-        subGroup?: string;
+        _name?: Element;
+    }
+    /**
+     * Exceptions for patient payments
+     */
+    interface CoverageCostToBeneficiaryException extends BackboneElement {
         /**
-         * Contains extended information for property 'subGroup'.
+         * Exception category
          */
-        _subGroup?: Element;
+        type: CodeableConcept;
         /**
-         * Display text for the subsection of the group
+         * The effective period of the exception
          */
-        subGroupDisplay?: string;
+        period?: Period;
+    }
+    /**
+     * Patient payments for services/products
+     */
+    interface CoverageCostToBeneficiary extends BackboneElement {
         /**
-         * Contains extended information for property 'subGroupDisplay'.
+         * Cost category
          */
-        _subGroupDisplay?: Element;
+        type?: CodeableConcept;
         /**
-         * An identifier for the plan
+         * The amount or percentage due from the beneficiary
          */
-        plan?: string;
+        valueQuantity?: SimpleQuantity;
         /**
-         * Contains extended information for property 'plan'.
+         * Contains extended information of property 'valueQunatity'
          */
-        _plan?: Element;
+        _valueQuantity?: Element;
         /**
-         * Display text for the plan
+         * The amount or percentage due from the beneficiary
          */
-        planDisplay?: string;
+        valueMoney?: Money;
         /**
-         * Contains extended information for property 'planDisplay'.
+         * Exceptions for patient payements
          */
-        _planDisplay?: Element;
-        /**
-         * An identifier for the subsection of the plan
-         */
-        subPlan?: string;
-        /**
-         * Contains extended information for property 'subPlan'.
-         */
-        _subPlan?: Element;
-        /**
-         * Display text for the subsection of the plan
-         */
-        subPlanDisplay?: string;
-        /**
-         * Contains extended information for property 'subPlanDisplay'.
-         */
-        _subPlanDisplay?: Element;
-        /**
-         * An identifier for the class
-         */
-        class?: string;
-        /**
-         * Contains extended information for property 'class'.
-         */
-        _class?: Element;
-        /**
-         * Display text for the class
-         */
-        classDisplay?: string;
-        /**
-         * Contains extended information for property 'classDisplay'.
-         */
-        _classDisplay?: Element;
-        /**
-         * An identifier for the subsection of the class
-         */
-        subClass?: string;
-        /**
-         * Contains extended information for property 'subClass'.
-         */
-        _subClass?: Element;
-        /**
-         * Display text for the subsection of the subclass
-         */
-        subClassDisplay?: string;
-        /**
-         * Contains extended information for property 'subClassDisplay'.
-         */
-        _subClassDisplay?: Element;
+        exception?: CoverageCostToBeneficiaryException[];
     }
     /**
      * Insurance or medical plan or a payment agreement
@@ -9010,8 +8972,9 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         identifier?: Identifier[];
         /**
          * active | cancelled | draft | entered-in-error
+         * Required: http://hl7.org/fhir/ValueSet/fm-status
          */
-        status?: code;
+        status: code;
         /**
          * Contains extended information for property 'status'.
          */
@@ -9039,7 +9002,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Plan Beneficiary
          */
-        beneficiary?: Reference;
+        beneficiary: Reference;
         /**
          * Beneficiary relationship to the Subscriber
          */
@@ -9051,11 +9014,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Identifier for the plan or agreement issuer
          */
-        payor?: Reference[];
+        payor: Reference[];
         /**
          * Additional coverage classifications
          */
-        grouping?: CoverageGrouping;
+        class?: CoverageClass[];
         /**
          * Dependent number
          */
@@ -9064,14 +9027,6 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Contains extended information for property 'dependent'.
          */
         _dependent?: Element;
-        /**
-         * The plan instance or sequence counter
-         */
-        sequence?: string;
-        /**
-         * Contains extended information for property 'sequence'.
-         */
-        _sequence?: Element;
         /**
          * Relative order of the coverage
          */
@@ -9088,6 +9043,18 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Contains extended information for property 'network'.
          */
         _network?: Element;
+        /**
+         * Patient payments for services/products
+         */
+        costToBeneficiary?: CoverageCostToBeneficiary[];
+        /**
+         * Reimbursement to insurer
+         */
+        subrogation?: boolean;
+        /**
+         * Contains extended information for property 'subrogation'
+         */
+        _subrogation?: Element;
         /**
          * Contract details
          */
