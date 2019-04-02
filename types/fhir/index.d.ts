@@ -11371,15 +11371,29 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         author?: Reference;
     }
     /**
+     * Supporting evidence
+     */
+    interface DetectedIssueEvidence extends BackboneElement {
+        /**
+         * Manifestation
+         */
+        code?: CodeableConcept[];
+        /**
+         * Supporting information
+         */
+        detail?: Reference[];
+    }
+    /**
      * Clinical issue with action
      */
     interface DetectedIssue extends DomainResource {
         /**
          * Unique id for the detected issue
          */
-        identifier?: Identifier;
+        identifier?: Identifier[];
         /**
          * registered | preliminary | final | amended +
+         * Required: http://hl7.org/fhir/ValueSet/observation-status
          */
         status: code;
         /**
@@ -11389,9 +11403,10 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Issue Category, e.g. drug-drug, duplicate therapy, etc.
          */
-        category?: CodeableConcept;
+        code?: CodeableConcept;
         /**
          * high | moderate | low
+         * Required: http://hl7.org/fhir/ValueSet/detectedissue-severity
          */
         severity?: code;
         /**
@@ -11405,11 +11420,15 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * When identified
          */
-        date?: dateTime;
+        identifiedDateTime?: dateTime;
         /**
-         * Contains extended information for property 'date'.
+         * Contains extended information for property 'identifiedDateTime'
          */
-        _date?: Element;
+        _identifiedDateTime?: Element;
+        /**
+         * When identified
+         */
+        identifiedPeriod?: Period;
         /**
          * The provider or device that identified the issue
          */
@@ -11418,6 +11437,10 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Problem resource
          */
         implicated?: Reference[];
+        /**
+         * Supporting evidence
+         */
+        evidence?: DetectedIssueEvidence[];
         /**
          * Description and context
          */
