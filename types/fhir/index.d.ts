@@ -11463,65 +11463,135 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         mitigation?: DetectedIssueMitigation[];
     }
     /**
-     * Unique Device Identifier (UDI) Barcode string
+     * Unique Device Identifier (UDI)
      */
-    interface DeviceUdi extends BackboneElement {
+    interface DeviceUdiCarrier extends BackboneElement {
         /**
          * Mandatory fixed portion of UDI
          */
         deviceIdentifier?: string;
         /**
-         * Contains extended information for property 'deviceIdentifier'.
+         * Contains extended information for property 'deviceIdentifier'
          */
         _deviceIdentifier?: Element;
-        /**
-         * Device Name as appears on UDI label
-         */
-        name?: string;
-        /**
-         * Contains extended information for property 'name'.
-         */
-        _name?: Element;
-        /**
-         * Regional UDI authority
-         */
-        jurisdiction?: uri;
-        /**
-         * Contains extended information for property 'jurisdiction'.
-         */
-        _jurisdiction?: Element;
-        /**
-         * UDI Human Readable Barcode String
-         */
-        carrierHRF?: string;
-        /**
-         * Contains extended information for property 'carrierHRF'.
-         */
-        _carrierHRF?: Element;
-        /**
-         * UDI Machine Readable Barcode String
-         */
-        carrierAIDC?: base64Binary;
-        /**
-         * Contains extended information for property 'carrierAIDC'.
-         */
-        _carrierAIDC?: Element;
         /**
          * UDI Issuing Organization
          */
         issuer?: uri;
         /**
-         * Contains extended information for property 'issuer'.
+         * Contains extended information for property 'issuer'
          */
         _issuer?: Element;
         /**
+         * Regional UDI authority
+         */
+        jurisdiction?: uri;
+        /**
+         * Contains extended information for property 'jurisdiction'
+         */
+        _jurisdictino?: Element;
+        /**
+         * UDI Machine Readable Barcode String
+         */
+        carrierAIDC?: base64Binary;
+        /**
+         * Contains extended information for property 'carrierAIDC'
+         */
+        _carrierAIDC?: Element;
+        /**
+         * UDI Humand Readable Barcode String
+         */
+        carrierHRF?: string;
+        /**
+         * Contains extended information for property 'carrierHRF'
+         */
+        _carrierHRF?: Element;
+        /**
          * barcode | rfid | manual +
+         * Requried: http://www.hl7.org/fhir/valueset-udi-entry-type
          */
         entryType?: code;
         /**
-         * Contains extended information for property 'entryType'.
+         * Contains extended information for property 'entryType'
          */
         _entryType?: Element;
+    }
+    /**
+     * The name of the device as given by the manufacturer
+     */
+    interface DeviceDeviceName extends BackboneElement {
+        /**
+         * The name of the device
+         */
+        name: string;
+        /**
+         * Contains extended information for propery 'name'
+         */
+        _name?: Element;
+        /**
+         * udi-label-name | user-friendly-name | patient-reported-name | manufacturer-name | model-name | other
+         * Required: http://www.hl7.org/fhir/valueset-device-nametype
+         */
+        type: code;
+        /**
+         * Contains extended information for property 'type'
+         */
+        _type?: Element;
+    }
+    /**
+     * The capabilities supported on a device, the standards to which the device conforms for a particular purpose, and used for the communication
+     */
+    interface DeviceSpecialization extends BackboneElement {
+        /**
+         * The standard that is used to operate and communicate
+         */
+        systemType: CodeableConcept;
+        /**
+         * The version of the standard that is used to operate and communicate
+         */
+        version?: string;
+        /**
+         * Contains extended information for property 'version'
+         */
+        _version?: Element;
+    }
+    /**
+     * The actual design of the device or software version running on the device
+     */
+    interface DeviceVersion extends BackboneElement {
+        /**
+         * The type of the device version
+         */
+        type?: CodeableConcept;
+        /**
+         * A single component of the device version
+         */
+        component?: Identifier;
+        /**
+         * The version text
+         */
+        value: string;
+        /**
+         * Contains extended information for property 'value'
+         */
+        _value?: Element;
+    }
+    /**
+     * The actual configuration settings of a device as it actually operates, e.g. regulation status, time properties
+     */
+    interface DeviceProperty extends BackboneElement {
+        /**
+         * Code that specifies the property DeviceDefinitionPropertyCode
+         */
+        type: CodeableConcept;
+        /**
+         * Property value as a quantity
+         */
+        valueQuantity?: Quantity[];
+        /**
+         * Property value as a code, e.g. NTP4 (synced to NTP)
+         */
+        valueCode?: CodeableConcept;
     }
     /**
      * Item used in healthcare
@@ -11532,11 +11602,16 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         identifier?: Identifier[];
         /**
-         * Unique Device Identifier (UDI) Barcode string
+         * The reference to the defintion for the device
          */
-        udi?: DeviceUdi;
+        definition?: Reference;
+        /**
+         * Unique Device Identifier (UDI)
+         */
+        udiCarrier?: DeviceUdiCarrier[];
         /**
          * active | inactive | entered-in-error | unknown
+         * Required: http://hl7.org/fhir/ValueSet/device-status
          */
         status?: code;
         /**
@@ -11544,17 +11619,17 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         _status?: Element;
         /**
-         * What kind of device this is
+         * online | paused | standby | offline | not-ready | transduc-discon | hw-discon | off
          */
-        type?: CodeableConcept;
+        statusReason?: CodeableConcept[];
         /**
-         * Lot number of manufacture
+         * The distinct identification string
          */
-        lotNumber?: string;
+        distinctIdentifier?: string;
         /**
-         * Contains extended information for property 'lotNumber'.
+         * Contains extended information for property 'distinctIdentifier'
          */
-        _lotNumber?: Element;
+        _distinctIdentifier?: Element;
         /**
          * Name of device manufacturer
          */
@@ -11580,21 +11655,61 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         _expirationDate?: Element;
         /**
-         * Model id assigned by the manufacturer
+         * Lot number of manufacture
          */
-        model?: string;
+        lotNumber?: string;
         /**
-         * Contains extended information for property 'model'.
+         * Contains extended information for property 'lotNumber'.
          */
-        _model?: Element;
+        _lotNumber?: Element;
+        /**
+         * Serial number assigned by the manufacturer
+         */
+        serialNumber?: string;
+        /**
+         * Contains extended information for property 'serialNumber'
+         */
+        _serialNumber?: Element;
+        /**
+         * The name of the device as given by the manufacturer
+         */
+        deviceName?: DeviceDeviceName[];
+        /**
+         * The model number for the device
+         */
+        modelNumber?: string;
+        /**
+         * Contains extended information for property 'modelNumber'
+         */
+        _modelNumber?: Element;
+        /**
+         * The part number of the device
+         */
+        partNumber?: string;
+        /**
+         * Contains extended information for property 'partNumber'
+         */
+        _partNumber?: Element;
+         /**
+         * What kind of device this is
+         */
+        type?: CodeableConcept;
+        /**
+         * The capabilities supported on a device, the standards to which the device conforms for a particular purpose, and used for the communication
+         */
+        specialization?: DeviceSpecialization;
         /**
          * Version number (i.e. software)
          */
-        version?: string;
+        version?: DeviceVersion[];
         /**
          * Contains extended information for property 'version'.
          */
         _version?: Element;
+        /**
+         * The actual configuration settings of a device as it actually operates, e.g. regulation time, time properties
+         */
+        property?: DeviceProperty[];
         /**
          * Patient to whom Device is affixed
          */
@@ -11627,6 +11742,10 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Safety Characteristics of Device
          */
         safety?: CodeableConcept[];
+        /**
+         * The parent device
+         */
+        parent?: Reference;
     }
     /**
      * Specification details such as Component Revisions, or Serial Numbers
