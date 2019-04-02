@@ -9061,6 +9061,189 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         contract?: Reference[];
     }
     /**
+     * Supporting Information
+     */
+    interface CoverageEligibilityRequestSupportingInfo extends BackboneElement {
+        /**
+         * Information instance identifier
+         */
+        sequence: positiveInt;
+        /**
+         * Contains extended information for property 'sequence'
+         */
+        _sequence?: Element;
+        /**
+         * Applies to all items
+         */
+        appliesToAll?: boolean;
+        /**
+         * Contains extended information for property 'appliesToAll'
+         */
+        _appliesToAll?: Element;
+    }
+    /**
+     * Patient insurance information
+     */
+    interface CoverageEligibilityRequestInsurance extends BackboneElement {
+        /**
+         * Applicable coverage
+         */
+        focal?: boolean;
+        /**
+         * Contains extended information for property 'focal'
+         */
+        _focal?: Element;
+        /**
+         * Insurance information
+         */
+        coverage: Reference;
+        /**
+         * Additional provider contract number
+         */
+        businessArrangement?: string;
+        /**
+         * Contains extended information for property 'businessArrangement'
+         */
+        _businessArrangement?: Element;
+    }
+    /**
+     * Applicable diagnosis
+     */
+    interface CoverageEligibilityRequestItemDiagnosis extends BackboneElement {
+        /**
+         * Nature of illnes or problem
+         */
+        diagnosisCodeableConcept?: CodeableConcept;
+        /**
+         * Nature of illnes or problem
+         */
+        diagnosisReference?: Reference;
+    }
+    /**
+     * Item to be evaluated for eligibility
+     */
+    interface CoverageEligibilityRequestItem extends BackboneElement {
+        /**
+         * Applicable exception or supporting infromation
+         */
+        supportingInfoSequence?: positiveInt[];
+        /**
+         * Contains extended information for property 'supportingInfoSequence'
+         */
+        _supportingInfoSequence?: Element[];
+        /**
+         * Benefit classification
+         */
+        category?: CodeableConcept;
+        /**
+         * Billing, service, product or drug code
+         */
+        productOrService?: CodeableConcept;
+        /**
+         * Product or service billing modifiers
+         */
+        modifier?: CodeableConcept[];
+        /**
+         * Performing practitioner
+         */
+        provider?: Reference;
+        /**
+         * Count of products or services
+         */
+        quantity?: SimpleQuantity;
+        /**
+         * Fee, charge or cost per item
+         */
+        unitPrice?: Money;
+        /**
+         * Servicing facilty
+         */
+        facility?: Reference;
+        /**
+         * Applicable diagnosis
+         */
+        diagnosis?: CoverageEligibilityRequestItemDiagnosis[];
+        /**
+         * Product or service details
+         */
+        detail?: Reference[];
+    }
+    /**
+     * CoverageEligibiltiyRequest resource
+     */
+    interface CoverageEligibilityRequest extends DomainResource {
+        /**
+         * Business Identifier for coverage eligibility request
+         */
+        identifier?: Identifier[];
+        /**
+         * active | cancelled | draft | entered-in-error
+         * Required: http://hl7.org/fhir/valueset-fm-status
+         */
+        status: code;
+        /**
+         * Contains extended information for property 'status'
+         */
+        _status?: Element;
+        /**
+         * desired processing priority
+         */
+        priority?: CodeableConcept;
+        /**
+         * auth-requirements | benefits | discovery | validation
+         * Required: http://www.hl7.org/fhir/valueset-eligibilityrequest-purpose
+         */
+        purpose: code[];
+        /**
+         * Intended recipient of products and services
+         */
+        patient: Reference;
+        /**
+         * Estimateed date or dates of services
+         */
+        servicedDate?: date;
+        /**
+         * Contains extended information for property 'servicedDate'
+         */
+        _servicedDate?: Element;
+        /**
+         * Creation
+         */
+        created: dateTime;
+        /**
+         * Contains extended information for property 'created'
+         */
+        _created?: Element;
+        /**
+         * Author
+         */
+        enterer?: Reference;
+        /**
+         * Party responsible for the request
+         */
+        provider?: Reference;
+        /**
+         * Coverage issuer
+         */
+        insurer: Reference;
+        /**
+         * Servicing facility
+         */
+        facility?: Reference;
+        /**
+         * Supporting information
+         */
+        supportingInfo?: CoverageEligibilityRequestSupportingInfo[];
+        /**
+         * Patient insurance information
+         */
+        insurance?: CoverageEligibilityRequestInsurance[];
+        /**
+         * Item to be evaluated for eligibility
+         */
+        item?: CoverageEligibilityRequestItem[];
+    }
+    /**
      * External specification mapped to
      */
     interface DataElementMapping extends BackboneElement {
