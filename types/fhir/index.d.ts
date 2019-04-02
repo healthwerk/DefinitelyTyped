@@ -9244,6 +9244,270 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         item?: CoverageEligibilityRequestItem[];
     }
     /**
+     * Benefit summary
+     */
+    interface CoverageEligibilityResponseInsuranceItemBenefit extends BackboneElement {
+        /**
+         * Benefit classification
+         */
+        type: CodeableConcept;
+        /**
+         * Benefits allowed
+         */
+        allowedUnsignedInt?: unsignedInt;
+        /**
+         * Contains extended information for property 'allowedUnsignedInt'
+         */
+        _allowedUnsignedInt?: Element;
+        /**
+         * Benefits allowed
+         */
+        allowedString?: string;
+        /**
+         * Contains extended information for property 'allowedString'
+         */
+        _allowedString?: Element;
+        /**
+         * Benefits used
+         */
+        usedUnsignedInt?: unsignedInt;
+        /**
+         * Contains extended information for property 'usedUnsignedInt'
+         */
+        _usedUnsignedInt?: Element;
+        /**
+         * Benefits used
+         */
+        usedString?: string;
+        /**
+         * Contains extended information for property 'usedString'
+         */
+        _usedString?: Element;
+        /**
+         * Benefits used
+         */
+        usedMoney?: Money;
+        /**
+         * Benefits allowed
+         */
+        allowedMoney?: Money;
+    }
+    /**
+     * Benefits and authorization details
+     */
+    interface CoverageEligibilityResponseInsuranceItem extends BackboneElement {
+        /**
+         * Benefit classification
+         */
+        category?: CodeableConcept;
+        /**
+         * Billing, service, product, or drug code
+         */
+        productOrService?: CodeableConcept;
+        /**
+         * Product or service billing modifiers
+         */
+        modifier?: CodeableConcept[];
+        /**
+         * Performing practitioner
+         */
+        provider?: Reference;
+        /**
+         * Exluded from the plan
+         */
+        excluded?: boolean;
+        /**
+         * Contains extended information for property 'excluded'
+         */
+        _excluded?: Element;
+        /**
+         * Short name for the benefit
+         */
+        name?: string;
+        /**
+         * Contains extended information for property 'name'
+         */
+        _name?: Element;
+        /**
+         * Description of the benefit or services covered
+         */
+        description?: string;
+        /**
+         * Contains extended information for property 'description'
+         */
+        _description?: Element;
+        /**
+         * In or out of network
+         */
+        network?: CodeableConcept;
+        /**
+         * Indiviual or family
+         */
+        unit?: CodeableConcept;
+        /**
+         * Annual or lifetime
+         */
+        term?: CodeableConcept;
+        /**
+         * Benefit Summary
+         */
+        benefit?: CoverageEligibilityResponseInsuranceItemBenefit[];
+        /**
+         * Authoritation required flag
+         */
+        authorizationRequired?: boolean;
+        /**
+         * Contains extended information for property 'authorizationRequired'
+         */
+        _authorizationRequired?: Element;
+        /**
+         * Type of required supporting materials
+         */
+        authorizationSupporting?: CodeableConcept[];
+        /**
+         * Preauthorization requirements endpoint
+         */
+        authorizationUrl?: uri;
+        /**
+         * Contains extended information for property 'authorizationUrl'
+         */
+        _authorizationUrl?: Element;
+    }
+    /**
+     * Patient insurance information
+     */
+    interface CoverageEligibilityResponseInsurance extends BackboneElement {
+        /**
+         * Insurance information
+         */
+        coverage: Reference;
+        /**
+         * Coverage inforce indicator
+         */
+        inforce?: boolean; 
+        /**
+         * Contains extended information for property 'inforce'
+         */
+        _inforce?: Element;
+        /**
+         * When the benefits are applicable
+         */
+        benefitPeriod?: Period;
+        /**
+         * Benefits and authorization details
+         */
+        item?: CoverageEligibilityResponseInsuranceItem[];
+    }
+    /**
+     * Processing errors
+     */
+    interface CoverageEligibilityResponseError extends BackboneElement {
+        /**
+         * Error code detailing processing issues
+         */
+        code: CodeableConcept;
+    }
+    /**
+     * CoverageEligibilityResponse resource
+     */
+    interface CoverageEligibilityResponse extends DomainResource {
+        /**
+         * Business Identifer for coverage eligibility response
+         */
+        identifier?: Identifier[];
+        /**
+         * active | cancelled | draft | entered-in-error 
+         * Required: http://www.hl7.org/fhir/valueset-fm-status
+         */
+        status: code;
+        /**
+         * Contains extended information for property 'code'
+         */
+        _status?: Element;
+        /**
+         * auth-requirements | benefits | discorvery | validation
+         * Requiered: http://www.hl7.org.fhir/valueset-eligibilityresponse-purpose
+         */
+        purpose: code[];
+        /**
+         * Contains extended information for property 'purpose'
+         */
+        _purpose?: Element[];
+        /**
+         * Intended recipient of products and services
+         */
+        patient: Reference;
+        /**
+         * Estimated date or dates of service
+         */
+        servicedDate?: date;
+        /**
+         * Contains extended information for property 'servicedDate'
+         */
+        _servicedDate?: Element;
+        /**
+         * Estimated date or dates of service
+         */
+        servicedPeriod?: Period;
+        /**
+         * Response creation date
+         */
+        created: dateTime;
+        /**
+         * Contains extended information for property 'created'
+         */
+        _created?: Element;
+        /**
+         * Party responsible for the request
+         */
+        requestor?: Reference;
+        /**
+         * Eligibility request reference
+         */
+        request: Reference;
+        /**
+         * queued | complete | error | partial
+         * Required: http://www.hl7.org./fhir/valueset-remittance-outcome
+         */
+        outcome: code;
+        /**
+         * Contains extended information for property 'outcome'
+         */
+        _outcome?: Element;
+        /**
+         * Disposition message
+         */
+        disposition?: string;
+        /**
+         * Contains extended information for property 'disposition'
+         */
+        _disposition?: Element;
+        /**
+         * Coverage issuer
+         */
+        insurer: Reference;
+        /**
+         * Patient insurance information
+         */
+        insurance?: CoverageEligibilityResponseInsurance[];
+        /**
+         * Preauthorization reference
+         */
+        preAuthReef?: string;
+        /**
+         * Contains extended information for property 'preAuthRef'
+         */
+        _preAuthRef?: Element;
+        /**
+         * Printed form identifier
+         */
+        form?: CodeableConcept;
+        /**
+         * Processing errors
+         */
+        error?: CoverageEligibilityResponseError[];
+    }
+    /**
      * External specification mapped to
      */
     interface DataElementMapping extends BackboneElement {
