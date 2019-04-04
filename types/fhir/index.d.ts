@@ -12153,17 +12153,33 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         calibration?: DeviceMetricCalibration[];
     }
     /**
-     * Who/what is requesting diagnostics
+     * Device details
      */
-    interface DeviceRequestRequester extends BackboneElement {
+    interface DeviceRequestParameter extends BackboneElement {
         /**
-         * Individual making the request
+         * Device detail
          */
-        agent: Reference;
+        code?: CodeableConcept;
         /**
-         * Organization agent is acting for
+         * Value of detail
          */
-        onBehalfOf?: Reference;
+        valueCodeableConcept?: CodeableConcept;
+        /**
+         * Value of detail
+         */
+        valueQuantity?: Quantity;
+        /**
+         * Value of detail
+         */
+        valueRange?: Range;
+        /**
+         * Value of detail
+         */
+        valueBoolean?: boolean;
+        /**
+         * Contains extended information for property 'valueBoolean'
+         */
+        _valueBoolean?: Element;
     }
     /**
      * Medical device request
@@ -12174,9 +12190,21 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         identifier?: Identifier[];
         /**
-         * Protocol or definition
+         * Instantiates FHIR protocol or definition
          */
-        definition?: Reference[];
+        instantiatesCanonical?: canonical[];
+        /**
+         * Contains extended information for property 'instantiatesCanonical'
+         */
+        _instantiatesCanonical?: Element;
+        /**
+         * Instantiates external protocol or definition
+         */
+        instantiatesUri?: uri[];
+        /**
+         * Contains extened information for property 'instantiatesUri'
+         */
+        _instantiatesUri?: Element;
         /**
          * What request fulfills
          */
@@ -12191,6 +12219,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         groupIdentifier?: Identifier;
         /**
          * draft | active | suspended | completed | entered-in-error | cancelled
+         * Required: http://hl7.org/fhir/ValueSet/request-status
          */
         status?: code;
         /**
@@ -12199,10 +12228,12 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _status?: Element;
         /**
          * proposal | plan | original-order | encoded | reflex-order
+         * Required: http://hl7.org/fhir/ValueSet/request-intent
          */
-        intent: CodeableConcept;
+        intent: code;
         /**
          * Indicates how quickly the {{title}} should be addressed with respect to other requests
+         * Required: http://hl7.org/fhir/ValueSet/request-priority
          */
         priority?: code;
         /**
@@ -12218,13 +12249,17 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         codeCodeableConcept?: CodeableConcept;
         /**
+         * Device details
+         */
+        parameter?: DeviceRequestParameter[];
+        /**
          * Focus of request
          */
         subject: Reference;
         /**
-         * Encounter or Episode motivating request
+         * Encounter motivating request
          */
-        context?: Reference;
+        encounter?: Reference;
         /**
          * Desired time or schedule for use
          */
@@ -12252,7 +12287,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Who/what is requesting diagnostics
          */
-        requester?: DeviceRequestRequester;
+        requester?: Reference;
         /**
          * Fille role
          */
@@ -12269,6 +12304,10 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          * Linked Reason for request
          */
         reasonReference?: Reference[];
+        /**
+         * Associated insurance coverage
+         */
+        insurance?: Reference;
         /**
          * Additional clinical information
          */
