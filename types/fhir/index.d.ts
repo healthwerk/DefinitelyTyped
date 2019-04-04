@@ -11822,6 +11822,246 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         languageCode?: CodeableConcept;
     }
     /**
+     * Unique Device Identifier (UDI)
+     */
+    interface DeviceDefinitionUdiDeviceIdentifier extends BackboneElement {
+        /**
+         * The identifier that is to be associated with every Device that references this DeviceDefinition for the issuer and jurisdication provided in the DeviceDefinition.udiDeviceIdentifier
+         */
+        deviceIdentifier: string;
+        /**
+         * Contains extended information for property 'deviceIdentifier'
+         */
+        _deviceIdentifier?: Element;
+        /**
+         * The organization that assigns the identifier algorithm
+         */
+        issuer: uri;
+        /**
+         * Contains extended information for property 'issuer'
+         */
+        _issuer?: Element;
+        /**
+         * The jurisdiction to which the deviceIdentifier applies 
+         */
+        jurisdiction: uri;
+        /**
+         * Contains extended information for property 'jurisdiction'
+         */
+        _jurisdiction?: Element;
+    }
+    /**
+     * A name given to the device to identify it
+     */
+    interface DeviceDefinitionDeviceName extends BackboneElement {
+        /**
+         * The name of the device
+         */
+        name: string;
+        /**
+         * Contains extended information for property 'name'
+         */
+        _name?: Element;
+        /**
+         * udi-label-name | user-friendly-name | patient-reported-name | manufacturer-name | model-name | other
+         * Required: http://www.hl7.org/fhir/valueset-device-nametype
+         */
+        type: code;
+        /**
+         * Contains extended information for property 'type'
+         */
+        _type?: Element;
+    }
+    /**
+     * The capabilities supported on a device, the standards to which the device conforms for a particular purpose, and used for the communication
+     */
+    interface DeviceDefinitionSpecialization extends BackboneElement {
+        /**
+         * The standard that is used to operate and communicate
+         */
+        systemType: string;
+        /**
+         * Contains extended information for property 'sytemType'
+         */
+        _systemType?: Element;
+        /**
+         * The version of the standard that is used to operate and communicate
+         */
+        version?: string;
+        /**
+         * Contains extended information for property 'version'
+         */
+        _version?: Element;
+    }
+    /**
+     * Device capabilities
+     */
+    interface DeviceDefinitionCapability extends BackboneElement {
+        /**
+         * Type of capability
+         */
+        type: CodeableConcept;
+        /**
+         * Description of capability
+         */
+        description?: CodeableConcept[];
+    }
+    /**
+     * The actual configuration settings of a device as it actually operates
+     */
+    interface DeviceDefinitionProperty extends BackboneElement {
+        /**
+         * Code that specifies the property DeviceDefinitionPropertyCode
+         */
+        type: CodeableConcept;
+        /**
+         * Property value as a quantity
+         */
+        valueQuantity?: Quantity[];
+        /**
+         * Property value as a code e.g. NTP4
+         */
+        valueCode?: CodeableConcept;
+    }
+    /**
+     * A substance used to create the material(s) of which the device is made
+     */
+    interface DeviceDefinitionMaterial extends BackboneElement {
+        /**
+         * The substance
+         */
+        substance: CodeableConcept;
+        /**
+         * Indicates an alternative material of the device
+         */
+        alternate?: boolean;
+        /**
+         * Contains extended information for property 'alternate'
+         */
+        _alternate?: Element;
+        /**
+         * Whether the substance is a known or suspected allergen
+         */
+        allergenicIndicator?: boolean;
+        /**
+         * Contains extended information for property 'allergenicInddicator'
+         */
+        _allergenicIndicator?: Element;
+    }
+    /**
+     * An instance of a medical-related component of a medical device
+     */
+    interface DeviceDefinition extends DomainResource {
+        /**
+         * Instance identifier
+         */
+        identifier?: Identifier[];
+        /**
+         * Unique device Identifier (UDI)
+         */
+        udiDeviceIdentifier?: DeviceDefinitionUdiDeviceIdentifier[];
+        /**
+         * Name of device manufacturer
+         */
+        manufacturerString?: string;
+        /**
+         * Contains extended information for property 'manufacturerString'
+         */
+        _manufacturerString?: Element;
+        /**
+         * Name of device manufacturer
+         */
+        manufacturerReference?: Reference;
+        /**
+         * A nam given to the device to identify it
+         */
+        deviceName?: DeviceDefinitionDeviceName[];
+        /**
+         * The model number for the device
+         */
+        modelNumber?: string;
+        /**
+         * Contains extended information for property 'modelNumber'
+         */
+        _modelNumber?: Element;
+        /**
+         * What kind of device or device system this is
+         */
+        type?: CodeableConcept;
+        /**
+         * The capabilities supported on a device, the standards to which the device conforms for a particular purpose, and used for th communication
+         */
+        specialization?: DeviceDefinitionSpecialization[];
+        /**
+         * Available versions
+         */
+        version?: string[];
+        /**
+         * Contains extended information for property 'version'
+         */
+        _version?: Element[];
+        /**
+         * Safety characteristics of the device
+         */
+        safety?: CodeableConcept[];
+        /**
+         * Shelf Life and storage information
+         */
+        shelfLifeStorage?: ProductShelfLife[];
+        /**
+         * Dimensions, colo etc.
+         */
+        physicalCharacteristics?: ProdCharacteristic;
+        /**
+         * Device capabilities
+         */
+        capability?: DeviceDefinitionCapability[];
+        /**
+         * The actual configuration settings of a device as it actually operates, e.g. regulation status, time properties
+         */
+        property?: DeviceDefinitionProperty[];
+        /**
+         * Organization responsible for device
+         */
+        owner?: Reference;
+        /**
+         * Details for human/organization for support
+         */
+        contact?: ContactPoint[];
+        /**
+         * Network adddress to contact device
+         */
+        url?: uri;
+        /**
+         * Contains extended information for property 'url'
+         */
+        _url?: Element;
+        /**
+         * Access to on-line information
+         */
+        onlineInformation?: uri;
+        /**
+         * Contains extended information for property 'onlineInformation'
+         */
+        _onlineInformation?: Element;
+        /**
+         * Device notes and comments
+         */
+        note?: Annotation[];
+        /**
+         * The quantity of the device present in the packaging (e.g. the number of devices present in a pack, or the number of devices of the medicinal product)
+         */
+        quantity?: Quantity;
+        /**
+         * The parent device it can be part of
+         */
+        parentDevice?: Reference;
+        /**
+         * A substance used to create the marerial/s) of which the device is made
+         */
+        material?: DeviceDefinitionMaterial[];
+    }
+    /**
      * Describes the calibrations that have been performed or that are required to be performed
      */
     interface DeviceMetricCalibration extends BackboneElement {
