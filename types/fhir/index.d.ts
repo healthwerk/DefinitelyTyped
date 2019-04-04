@@ -12067,6 +12067,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
     interface DeviceMetricCalibration extends BackboneElement {
         /**
          * unspecified | offset | gain | two-point
+         * Required: http://hl7.org/fhir/ValueSet/metric-calibration-type
          */
         type?: code;
         /**
@@ -12075,6 +12076,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _type?: Element;
         /**
          * not-calibrated | calibration-required | calibrated | unspecified
+         * Required: http://hl7.org/fhir/ValueSet/metric-calibration-state
          */
         state?: code;
         /**
@@ -12097,7 +12099,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Unique identifier of this DeviceMetric
          */
-        identifier: Identifier;
+        identifier?: Identifier[];
         /**
          * Identity of metric, for example Heart Rate or PEEP Setting
          */
@@ -12116,6 +12118,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         parent?: Reference;
         /**
          * on | off | standby | entered-in-error
+         * Required: http://hl7.org/fhir/ValueSet/metric-operational-status
          */
         operationalStatus?: code;
         /**
@@ -12124,6 +12127,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _operationalStatus?: Element;
         /**
          * black | red | green | yellow | blue | magenta | cyan | white
+         * Required: http://hl7.org/fhir/ValueSet/metric-color
          */
         color?: code;
         /**
@@ -12132,6 +12136,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _color?: Element;
         /**
          * measurement | setting | calculation | unspecified
+         * Required: http://hl7.org/fhir/ValueSet/metric-category
          */
         category: code;
         /**
