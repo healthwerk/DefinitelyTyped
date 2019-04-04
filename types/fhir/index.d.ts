@@ -12330,7 +12330,12 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         identifier?: Identifier[];
         /**
+         * Fulfills plan, proposal or order
+         */
+        basedOn?: Reference;
+        /**
          * active | completed | entered-in-error +
+         * Required: http://hl7.org/fhir/ValueSet/device-statement-status
          */
         status: code;
         /**
@@ -12342,9 +12347,9 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
          */
         subject: Reference;
         /**
-         * Period device was used
+         * Supporting information
          */
-        whenUsed?: Period;
+        derivedFrom?: Reference;
         /**
          * How often  the device was used
          */
@@ -12380,7 +12385,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Why device was used
          */
-        indication?: CodeableConcept[];
+        reasonCode?: CodeableConcept;
+        /**
+         * Why was DeviceUseStatement performed?
+         */
+        reasonReference?: Reference;
         /**
          * Target body site
          */
