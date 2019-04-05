@@ -12515,19 +12515,6 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         presentedForm?: Attachment[];
     }
     /**
-     * The items included
-     */
-    interface DocumentManifestContent extends BackboneElement {
-        /**
-         * Contents of this set of documents
-         */
-        pAttachment?: Attachment;
-        /**
-         * Contents of this set of documents
-         */
-        pReference?: Reference;
-    }
-    /**
      * Related things
      */
     interface DocumentManifestRelated extends BackboneElement {
@@ -12554,6 +12541,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         identifier?: Identifier[];
         /**
          * current | superseded | entered-in-error
+         * Required: http://hl7.org/fhir/ValueSet/document-reference-status
          */
         status: code;
         /**
@@ -12603,7 +12591,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * The items included
          */
-        content: DocumentManifestContent[];
+        content: Reference[];
         /**
          * Related things
          */
@@ -12615,6 +12603,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
     interface DocumentReferenceRelatesTo extends BackboneElement {
         /**
          * replaces | transforms | signs | appends
+         * Required: http://hl7.org/fhir/ValueSet/document-relationship-type
          */
         code: code;
         /**
@@ -12646,7 +12635,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Context of the document  content
          */
-        encounter?: Reference;
+        encounter?: Reference[];
         /**
          * Main clinical acts documented
          */
@@ -12670,20 +12659,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Related identifiers or resources
          */
-        related?: DocumentReferenceContextRelated[];
-    }
-    /**
-     * Related identifiers or resources
-     */
-    interface DocumentReferenceContextRelated extends BackboneElement {
-        /**
-         * Identifier of related objects or events
-         */
-        identifier?: Identifier;
-        /**
-         * Related Resource
-         */
-        ref?: Reference;
+        related?: Reference[];
     }
     /**
      * A reference to a document
@@ -12699,6 +12675,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         identifier?: Identifier[];
         /**
          * current | superseded | entered-in-error
+         * Required: http://hl7.org/fhir/ValueSet/document-reference-status
          */
         status: code;
         /**
@@ -12707,8 +12684,17 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         _status?: Element;
         /**
          * preliminary | final | appended | amended | entered-in-error
+         * Required: http://hl7.org/fhir/ValueSet/composition-status
          */
         docStatus?: code;
+        /**
+         * Creation date
+         */
+        date?: dateTime;
+        /**
+         * Contains extended information for property 'date'
+         */
+        _date?: Element;
         /**
          * Contains extended information for property 'docStatus'.
          */
@@ -12716,31 +12702,15 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Kind of document (LOINC if possible)
          */
-        type: CodeableConcept;
+        type?: CodeableConcept;
         /**
          * Categorization of document
          */
-        class?: CodeableConcept;
+        category?: CodeableConcept[];
         /**
          * Who/what is the subject of the document
          */
         subject?: Reference;
-        /**
-         * Document creation time
-         */
-        created?: dateTime;
-        /**
-         * Contains extended information for property 'created'.
-         */
-        _created?: Element;
-        /**
-         * When this document reference was created
-         */
-        indexed: instant;
-        /**
-         * Contains extended information for property 'indexed'.
-         */
-        _indexed?: Element;
         /**
          * Who and/or what authored the document
          */
