@@ -12389,7 +12389,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Why was DeviceUseStatement performed?
          */
-        reasonReference?: Reference;
+        reasonReference?: Reference[];
         /**
          * Target body site
          */
@@ -12400,22 +12400,9 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         note?: Annotation[];
     }
     /**
-     * Participants in producing the report
-     */
-    interface DiagnosticReportPerformer extends BackboneElement {
-        /**
-         * Type of performer
-         */
-        role?: CodeableConcept;
-        /**
-         * Practitioner or Organization  participant
-         */
-        actor: Reference;
-    }
-    /**
      * Key images associated with this report
      */
-    interface DiagnosticReportImage extends BackboneElement {
+    interface DiagnosticReportMedia extends BackboneElement {
         /**
          * Comment about the image (e.g. explanation)
          */
@@ -12443,6 +12430,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         basedOn?: Reference[];
         /**
          * registered | partial | preliminary | final +
+         * Required: http://hl7.org/fhir/ValueSet/diagnostic-report-status
          */
         status: code;
         /**
@@ -12452,7 +12440,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Service category
          */
-        category?: CodeableConcept;
+        category?: CodeableConcept[];
         /**
          * Name/Code for this diagnostic report
          */
@@ -12464,7 +12452,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Health care event when test ordered
          */
-        context?: Reference;
+        encounter?: Reference;
         /**
          * Clinically relevant time/time-period for report
          */
@@ -12488,7 +12476,11 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Participants in producing the report
          */
-        performer?: DiagnosticReportPerformer[];
+        performer?: Reference[];
+        /**
+         * Primary result interpreter
+         */
+        resultsInterpreter?: Reference;
         /**
          * Specimens this report is based on
          */
@@ -12504,7 +12496,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Key images associated with this report
          */
-        image?: DiagnosticReportImage[];
+        media?: DiagnosticReportMedia[];
         /**
          * Clinical Interpretation of test results
          */
@@ -12516,7 +12508,7 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         /**
          * Codes for the conclusion
          */
-        codedDiagnosis?: CodeableConcept[];
+        conclusionCode?: CodeableConcept[];
         /**
          * Entire report as issued
          */
