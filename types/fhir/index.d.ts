@@ -12749,6 +12749,343 @@ Extensible: http://hl7.org/fhir/ValueSet/adverse-event-category
         context?: DocumentReferenceContext;
     }
     /**
+     * What sample size was involved?
+     */
+    interface EffectEvidenceSynthesisSampleSize extends BackboneElement {
+        /**
+         * Description of sample size
+         */
+        description?: string;
+        /**
+         * Contains extended information for property 'description'
+         */
+        _description?: Element;
+        /**
+         * How many sudies?
+         */
+        numberOfStudies?: integer;
+        /**
+         * Contains extended information for property 'numberOfStudies'
+         */
+        _numberOfStudies?: Element;
+        /**
+         * How many participants?
+         */
+        numberOfParticipants?: integer;
+        /**
+         * Contains extended information for proeprt y'numberOfParticipant'
+         */
+        _numberOfParticipants?: Element;
+    }
+    /**
+     * What was the result per exposure
+     */
+    interface EffectEvidenceSynthesisResultsByEposure extends BackboneElement {
+        /**
+         * Descirption of results by exposure
+         */
+        description?: string;
+        /**
+         * Contains extended information for property 'description'
+         */
+        _description?: Element;
+        /**
+         * exposure | exposure-alternative
+         * Required: http://www.hl7.org/fhir/valueset-exposure-state
+         */
+        exposureState?: code;
+        /**
+         * Contains extended information for property 'exposureState'
+         */
+        _exposureState?: Element;
+        /**
+         * Variant exposure states
+         */
+        variantState?: CodeableConcept;
+        /**
+         * Risk evidence synthesis
+         */
+        riskEvidenceSynthesis: Reference;
+    }
+    /**
+     * How precise the estimate is
+     */
+    interface EffectEvidenceSynthesisEffectEstimatePrecisionEstimate extends BackboneElement {
+        /**
+         * Type of precision estimate
+         */
+        type?: CodeableConcept;
+        /**
+         * Level of confidence interval
+         */
+        level?: decimal;
+        /**
+         * Contains extended information for property 'level'
+         */
+        _level?: Element;
+        /**
+         * Lower bound
+         */
+        from?: decimal;
+        /**
+         * Contains extended information for property 'from'
+         */
+        _from?: Element;
+        /**
+         * Upper bound
+         */
+        to?: decimal;
+        /**
+         * Contains extended information for property 'to'
+         */
+        _to?: Element;
+    }
+    /**
+     * What was the estimated effect
+     */
+    interface EffectEvidenceSynthesisEffectEstimate extends BackboneElement {
+        /**
+         * Description of effect estimate
+         */
+        description?: string;
+        /**
+         * Contains extended information for property 'description'
+         */
+        _description?: Element;
+        /**
+         * Type of effect estimate
+         */
+        type?: CodeableConcept;
+        /**
+         * Variant exposure states
+         */
+        variantState?: CodeableConcept;
+        /**
+         * Point estimate
+         */
+        value?: decimal;
+        /**
+         * Contains extended information for property 'value'
+         */
+        _value?: Element;
+        /**
+         * What unit is the outcome described in?
+         */
+        unitOfMeasure?: CodeableConcept;
+        /**
+         * How precise the estimate is
+         */
+        precisionEstimate?: EffectEvidenceSynthesisEffectEstimatePrecisionEstimate[];
+    }
+    /**
+     * A component that contributes to the overall certainty
+     */
+    interface EffectEvidenceSynthesisCertaintyCertaintySubcomponent extends BackboneElement {
+        /**
+         * Type of subcomponent of certainty rating
+         */
+        type?: CodeableConcept;
+        /**
+         * Subcomponent certainty rating
+         */
+        rating?: CodeableConcept[];
+        /**
+         * Used for footnotes or explanatory notes
+         */
+        note?: Annotation;
+    }
+    /**
+     * How certain is the effect
+     */
+    interface EffectEvidenceSynthesisCertainty extends BackboneElement {
+        /**
+         * Cerainty rating
+         */
+        rating?: CodeableConcept[];
+        /**
+         * Used for footnotest or explanatory notes
+         */
+        note?: Annotation[];
+        /**
+         * A component that contributes to the overall certainty
+         */
+        certaintySubcomponent?: EffectEvidenceSynthesisCertaintyCertaintySubcomponent[];
+    }
+    /**
+     * A qunatified estimate of effect based on a body of evidence
+     */
+    interface EffectEvidenceSynthesis extends DomainResource {
+        /**
+         * Canonical identifier for this effect evidence synthesis represented as a URI
+         */
+        url?: uri;
+        /**
+         * contains extended information for property 'url'
+         */
+        _url?: Element;
+        /**
+         * Additional identifier for the effect evidence synthesis
+         */
+        identifier?: Identifier[];
+        /**
+         * Business version of the effect evidence synthesis
+         */
+        version?: string;
+        /**
+         * Contains extended information for property 'version'
+         */
+        _version?: Element;
+        /**
+         * Name for this effect evidence synthesis (computer friendly)
+         */
+        name?: string;
+        /**
+         * Contains extended information for property 'name'
+         */
+        _name?: Element;
+        /**
+         * Name for this effect evidence synthesis (human friendly)
+         */
+        title?: string;
+        /**
+         * Contains extended information for property 'title'
+         */
+        _title?: Element;
+        /**
+         * draft | active | retired | unknown
+         * Required: http://www.hl7.org/fhir/valueset-publication-status
+         */
+        status: code;
+        /**
+         * Contains extended information for property 'status'
+         */
+        _status?: Element;
+        /**
+         * Date last changed
+         */
+        date?: dateTime;
+        /**
+         * Contains extended information for property 'date'
+         */
+        _date?: Element;
+        /**
+         * Name of the publisher (organization or individual)
+         */
+        publisher?: string;
+        /**
+         * Contains extended information for property 'publisher'
+         */
+        _publisher?: Element;
+        /**
+         * Contact details for the publisher
+         */
+        contact?: ContactDetail[];
+        /**
+         * Natural language description of the effect evidence synthesis
+         */
+        description?: markdown;
+        /**
+         * Used for footnotes or explanatory notes
+         */
+        note?: Annotation[];
+        /**
+         * The context that the content is intended to support
+         */
+        useContext?: UsageContext[];
+        /**
+         * Intended jurisdiction for effect evidence synthesis
+         */
+        jurisdiction?: CodeableConcept[];
+        /**
+         * Use and/or publishing restrictions
+         */
+        copyright?: markdown;
+        /**
+         * When the effect evidence synthesis was approved by publisher
+         */
+        approvalDate?: date;
+        /**
+         * Contains extended information for property 'approvalDate'
+         */
+        _approvalDate?: Element;
+        /**
+         * When the effect evidence synthesis was last reviewed
+         */
+        lastReviewDate?: date;
+        /**
+         * Contains extended information for property 'lastReviewDate'
+         */
+        _lastReviewDate?: Element;
+        /**
+         * When the effect evidence synthesis is expected to be used
+         */
+        effectivePeriod?: Period;
+        /**
+         * The category ot th EffectEvidenceSynthesis, such as Education, Treatment, Assessment, etc.
+         */
+        topic?: CodeableConcept[];
+        /**
+         * Who authored the content
+         */
+        author?: ContactDetail[];
+        /**
+         * Who edited the content
+         */
+        editor?: ContactDetail[];
+        /**
+         * Who reviewed the content
+         */
+        reviewer?: ContactDetail[];
+        /**
+         * Who endorsed the content
+         */
+        endorser?: ContactDetail[];
+        /**
+         * Additional documentation, citations, etc.
+         */
+        relatedArtifact?: RelatedArtifact[];
+        /**
+         * Type of synthesis
+         */
+        synthesisType?: CodeableConcept;
+        /**
+         * Type of study
+         */
+        studyType?: CodeableConcept;
+        /**
+         * What population?
+         */
+        population: Reference;
+        /**
+         * What exposure?
+         */
+        exposure: Reference;
+        /**
+         * What comparison exposure?
+         */
+        exposureAlternative: Reference;
+        /**
+         * What outcome?
+         */
+        outcome: Reference;
+        /**
+         * What sample size was involved?
+         */
+        sampleSize?: EffectEvidenceSynthesisSampleSize;
+        /**
+         * What was the results per exposure
+         */
+        resultsByExposure?: EffectEvidenceSynthesisResultsByEposure[];
+        /**
+         * What was the estimated effect
+         */
+        effectEstimate?: EffectEvidenceSynthesisEffectEstimate[];
+        /**
+         * How certain is the effect
+         */
+        certainty?: EffectEvidenceSynthesisCertainty[];
+    }
+    /**
      * Determine insurance validity and scope of coverage
      */
     interface EligibilityRequest extends DomainResource {
